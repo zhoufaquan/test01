@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<canvas id="firstCanvas" width="300px" height="150px" ></canvas>
+<script>
+    var canvas=document.getElementById("firstCanvas");
+    var context=canvas.getContext("2d");
+
+
+    context.font="20px Georgia";
+    context.fillText('第一个canvas',10,50)
+
+    context.font="30px Verdana";
+    // 创建渐变
+    var gradient=context.createLinearGradient(0,0,canvas.width,0);
+    gradient.addColorStop("0","magenta");
+    gradient.addColorStop("0.5","blue");
+    gradient.addColorStop("1.0","red");
+    // 用渐变填色
+    context.fillStyle=gradient;
+    context.fillText("w3school.com.cn",10,90);
+</script>
+</body>
+</html>

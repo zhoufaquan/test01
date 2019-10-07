@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Admin" >
+    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="a_name" property="aName" jdbcType="VARCHAR" />
+    <result column="a_phone" property="aPhone" jdbcType="VARCHAR" />
+    <result column="a_mail" property="aMail" jdbcType="VARCHAR" />
+    <result column="a_password" property="aPassword" jdbcType="VARCHAR" />
+    <result column="a_limited" property="aLimited" jdbcType="BIT" />
+    <result column="a_photo" property="aPhoto" jdbcType="VARCHAR" />
+    <result column="a_state" property="aState" jdbcType="BIT" />
+    <result column="a_ct" property="aCt" jdbcType="TIMESTAMP" />
+    <result column="a_st" property="aSt" jdbcType="TIMESTAMP" />
+    <result column="a_lst" property="aLst" jdbcType="TIMESTAMP" />
+    <result column="a_count" property="aCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a_id, a_name, a_phone, a_mail, a_password, a_limited, a_photo, a_state, a_ct, a_st, 
+    a_lst, a_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectToLogin" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from admin
+    where a_phone=#{account} or a_mail=#{account} and a_password=#{password}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Admin" >
+    insert into admin (a_id, a_name, a_phone, 
+      a_mail, a_password, a_limited, 
+      a_photo, a_state, a_ct, 
+      a_st, a_lst, a_count
+      )
+    values (#{aId,jdbcType=INTEGER}, #{aName,jdbcType=VARCHAR}, #{aPhone,jdbcType=VARCHAR}, 
+      #{aMail,jdbcType=VARCHAR}, #{aPassword,jdbcType=VARCHAR}, #{aLimited,jdbcType=BIT}, 
+      #{aPhoto,jdbcType=VARCHAR}, #{aState,jdbcType=BIT}, #{aCt,jdbcType=TIMESTAMP}, 
+      #{aSt,jdbcType=TIMESTAMP}, #{aLst,jdbcType=TIMESTAMP}, #{aCount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        a_id,
+      </if>
+      <if test="aName != null" >
+        a_name,
+      </if>
+      <if test="aPhone != null" >
+        a_phone,
+      </if>
+      <if test="aMail != null" >
+        a_mail,
+      </if>
+      <if test="aPassword != null" >
+        a_password,
+      </if>
+      <if test="aLimited != null" >
+        a_limited,
+      </if>
+      <if test="aPhoto != null" >
+        a_photo,
+      </if>
+      <if test="aState != null" >
+        a_state,
+      </if>
+      <if test="aCt != null" >
+        a_ct,
+      </if>
+      <if test="aSt != null" >
+        a_st,
+      </if>
+      <if test="aLst != null" >
+        a_lst,
+      </if>
+      <if test="aCount != null" >
+        a_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aName != null" >
+        #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aPhone != null" >
+        #{aPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="aMail != null" >
+        #{aMail,jdbcType=VARCHAR},
+      </if>
+      <if test="aPassword != null" >
+        #{aPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="aLimited != null" >
+        #{aLimited,jdbcType=BIT},
+      </if>
+      <if test="aPhoto != null" >
+        #{aPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="aState != null" >
+        #{aState,jdbcType=BIT},
+      </if>
+      <if test="aCt != null" >
+        #{aCt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aSt != null" >
+        #{aSt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aLst != null" >
+        #{aLst,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aCount != null" >
+        #{aCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Admin" >
+    update admin
+    <set >
+      <if test="aName != null" >
+        a_name = #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aPhone != null" >
+        a_phone = #{aPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="aMail != null" >
+        a_mail = #{aMail,jdbcType=VARCHAR},
+      </if>
+      <if test="aPassword != null" >
+        a_password = #{aPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="aLimited != null" >
+        a_limited = #{aLimited,jdbcType=BIT},
+      </if>
+      <if test="aPhoto != null" >
+        a_photo = #{aPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="aState != null" >
+        a_state = #{aState,jdbcType=BIT},
+      </if>
+      <if test="aCt != null" >
+        a_ct = #{aCt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aSt != null" >
+        a_st = #{aSt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aLst != null" >
+        a_lst = #{aLst,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aCount != null" >
+        a_count = #{aCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Admin" >
+    update admin
+    set a_name = #{aName,jdbcType=VARCHAR},
+      a_phone = #{aPhone,jdbcType=VARCHAR},
+      a_mail = #{aMail,jdbcType=VARCHAR},
+      a_password = #{aPassword,jdbcType=VARCHAR},
+      a_limited = #{aLimited,jdbcType=BIT},
+      a_photo = #{aPhoto,jdbcType=VARCHAR},
+      a_state = #{aState,jdbcType=BIT},
+      a_ct = #{aCt,jdbcType=TIMESTAMP},
+      a_st = #{aSt,jdbcType=TIMESTAMP},
+      a_lst = #{aLst,jdbcType=TIMESTAMP},
+      a_count = #{aCount,jdbcType=INTEGER}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+
+  <update id="setAdminForLogin" parameterType="com.example.demo.entity.Admin">
+    update admin
+    set
+      a_st = #{aSt,jdbcType=TIMESTAMP},
+      a_lst = #{aLst,jdbcType=TIMESTAMP},
+      a_count = #{aCount,jdbcType=INTEGER}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>

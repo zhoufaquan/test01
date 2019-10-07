@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <style>
+        .containers {
+            width: 100%;
+            height: 1000px;
+            background: #1b6d85;
+        }
+
+        .navbar.navbar-default.navbar-fixed-top {
+            border: none;
+            height: 60px;
+            line-height: 60px !important;
+            margin: 0px;
+
+
+        }
+
+        .topColor {
+            background:;
+        }
+
+        .top {
+            height: 60px;
+
+        }
+
+        .ct {
+        float: left;
+        }
+
+        .navbar-brand {
+            padding: 0px;
+            height: 60px;
+            line-height: 60px;
+            padding-left: 70px;
+        }
+
+        .topLable {
+            height: 60px;
+            padding-left: 80px;
+            line-height: 60px;
+        }
+
+        .disabled a {
+            padding: 0px !important;
+            margin-right: 80px;
+            color: midnightblue !important;
+            font-size: revert;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 100px;
+            width: 100px!important;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 0px 16px;
+
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content span a{
+            padding: 0px!important;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="top">
+    <nav class="navbar navbar-default navbar-fixed-top  topColor">
+        <div class="container-fluid ct" style="padding: 0px;line-height: 60px!important;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Brand" src="/img/logo5.png" width="120px" height="60px">
+                </a>
+            </div>
+        </div>
+        <div class="ct topLable">
+            <ul class="nav nav-pills">
+
+                <li role="presentation" class="disabled"><a href="#">首页</a></li>
+                <li role="presentation" class="disabled"><a href="#">咨询中心</a></li>
+                <li role="presentation" class="disabled"><a href="#">考试大纲</a></li>
+                <li role="presentation" class="disabled"><a href="#">考试咨询</a></li>
+                <li role="presentation" class="disabled"><a href="#">相关下载</a></li>
+                <li role="presentation" class="disabled"><a href="#">考生服务<span class="glyphicon glyphicon-menu-down"
+                                                                               style="margin-left: 4px"></span></a></li>
+                <li role="presentation" class="disabled dropdown">
+                    <a href="#" >考试咨询</a>
+                    <div class="dropdown-content">
+                        <span><a href="#">考试报名</a></span>
+                        <span><a href="#">考试报名</a></span>
+                        <span><a href="#">考试报名</a></span>
+                        <span><a href="#">考试报名</a></span>
+                    </div>
+                    </li>
+                <li role="presentation" class="disabled"><a href="#">常见问题</a></li>
+            </ul>
+        </div>
+
+    </nav>
+</div>
+<div class="containers">
+    <div class="jumbotron" style="height: 400px">
+        <h1>Hello, world!</h1>
+        <p>...</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
+
+</div>
+<div class="bottom"></div>
+</body>
+<script type="text/javascript">
+    $(document).ready({})
+    var t = 0, b = 0;
+    $(window).scroll(function () {
+        t = $(this).scrollTop();
+        if (t > 0) {
+            $(".navbar.navbar-default.navbar-fixed-top").removeClass("topColor")
+        } else {
+            $(".navbar.navbar-default.navbar-fixed-top").addClass("topColor")
+        }
+    })
+
+</script>
+</html>

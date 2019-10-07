@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Koala userLogin</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <style>
+        #im {
+            height: 100px;
+            width: 200px;
+            color: brown;
+           /* background-image: url("static/img/1.jpg");
+            background-size:100% ;*/
+        }
+    </style>
+</head>
+<body>
+<div id="im" >欢迎使用考啦考试管理系统</div>
+<button id="bt1">点我</button>
+<button id="bt2">点我2</button>
+</body>
+<script type="text/javascript">
+    var datas={"id":1,"tName":"我进来了","tPwd":"hah"}
+    $(document).ready(function () {
+        $("#bt1").click(function () {
+            $.ajax({
+                url:"ajaxTest",
+                type:"get",
+                contentType:"application/json",
+                data:{"id":1,"name":"我进来了"},
+                success:function (m) {
+                    alert(m)
+                }
+            })
+        })
+
+        $("#bt2").click(function () {
+
+            $.ajax({
+                url:"ajaxTest3",
+                type:"post",
+                dataType:"text",
+                contentType:"application/json",
+                data:'{"id":1,"tName":"我进来了","tPwd":"hah"}',
+                success:function (m) {
+                    alert(m)
+                }
+            })
+        })
+    })
+</script>
+</html>
