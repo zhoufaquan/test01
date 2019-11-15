@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
-import java.util.Date;
+import lombok.ToString;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+@ToString
 public class Logs {
     private Integer logId;
 
@@ -12,6 +16,8 @@ public class Logs {
     private String logParm;
 
     private Date logTime;
+
+    private Integer logUserid;
 
     private String logUser;
 
@@ -54,7 +60,17 @@ public class Logs {
     }
 
     public void setLogTime(Date logTime) {
-        this.logTime = logTime;
+      //  DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+
+        this.logTime =logTime;
+    }
+
+    public Integer getLogUserid() {
+        return logUserid;
+    }
+
+    public void setLogUserid(Integer logUserid) {
+        this.logUserid = logUserid;
     }
 
     public String getLogUser() {

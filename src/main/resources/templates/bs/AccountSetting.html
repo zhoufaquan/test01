@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="This is a testing demo page">
+    <meta name="keywords" content="testing,html,demo">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>AccountSetting</title>
+
+    <link rel="stylesheet" href="/dist/css/bootstrap.min.css">
+    <style type="text/css">
+
+
+
+        a{
+            color: grey;/*背景颜色*/
+            text-decoration: none;/*去除文字的下划线*/
+        }
+
+
+        #head{
+            width: 960px;
+            margin: auto;
+            border-bottom: dotted 1px white; /*设置了白色的分界线*/
+            margin-bottom: 10px;
+        }
+
+
+        .logo_title{
+            float: left;
+        }
+
+
+        .logo_title h1{
+            font-size: 30px;
+            color: white;
+        }
+
+
+        .logo_title h2{
+            font-size: 20px;
+            color: white;
+        }
+
+
+        .navi{
+            float: right;
+        }
+
+
+        .navi ul{
+            list-style: none;/*去除前面的黑点*/
+            margin-top: 75px;
+        }
+
+
+        .navi ul li{
+            display: inline-block;/*排列方式，排列到一行*/
+            font-size: 20px;
+            color: white;/*写不写都可以*/
+            margin-right: 20px;/*外填充距离*/
+        }
+
+
+        .navi ul li a{
+            color: white;
+            border:solid 1px white;/*白色的方框*/
+            border-radius: 6px;/*边角设置弧度*/
+            padding: 4px;/*上下内填充*/
+            padding-left: 14px;/*左内边距*/
+            padding-right: 14px;/*右内边距*/
+        }
+
+
+        .clear{
+            clear: both;
+        }
+        #wrapper{
+            margin: auto;
+            width: 960px;
+            margin-top: 20px;
+        }
+
+
+        .main{
+            width: 640px;
+            background-color: white;
+            float: left;
+            margin-right:10px;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+
+        .item{
+            margin-top: 14px;
+            padding-bottom: 20px;
+            border-bottom: dotted 1px #999;
+
+
+        }
+
+
+        .item_img{
+            float: left;
+            height: 60px;
+            width: 100px;
+        }
+
+
+        .item_img img{
+            width: 80px;
+        }
+
+
+        .item_content{
+            /*padding-left: 100px;*/
+            /*float: right;*/
+            margin-bottom: 10px;
+        }
+
+
+        .item_content h3{
+            font-size: 14px;
+            color: #FF6347;
+            margin: 0;
+        }
+
+
+        .item_info{
+            font-size: 12px;
+            font-style: italic;
+            margin:0;
+            color: #999;
+        }
+
+
+        .item_desc{
+            font-size: 14px;
+            margin: 0;
+            color: gray;
+            margin-top:10px; /*与h2有一定的边距*/
+            border-left: solid 1px #ccc;/*设置左边框*/
+            padding-left: 10px;/*设置左填充*/
+        }
+
+
+
+
+        .side{
+            width: 220px;
+            background-color: white ;
+            float: right;
+            padding: 20px;
+            border-radius: 6px;
+            margin-left: 10px;
+            height: 450px;
+        }
+
+
+        .author_img{
+            margin-top: 20px;
+            width: 120px;
+            margin:auto;
+        }
+
+
+        .author_img img{
+            width: 120px;
+            border:solid 1px #ccc;
+            border-radius: 4px;
+        }
+
+
+        .author_desc{
+            text-align: center;
+            border:solid 1px #ccc;
+            border-radius: 4px;
+            background-color: #eee;
+            padding-top:10px;
+            padding-bottom: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+
+        .author_desc h4{
+            margin:0;
+            margin-bottom: 10px;
+        }
+
+
+        .author_desc p{
+            margin:0;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        .top_article h4{
+            font-size:14px;
+            font-style: italic;
+            margin:0;
+            border-bottom: dotted 1px #999;
+            border-top: 10px;
+        }
+
+
+        .top_article ul{
+            margin-left:0;
+            padding-left:10px;
+            list-style: none;
+
+
+        }
+
+
+        .top_article ul li{
+            margin:0;
+            font-size: 14px;
+            margin-top: 5px;
+
+
+        }
+
+        .site-info{
+            margin-top: 30px;
+            border-top: solid 1px #ccc;/*分界线*/
+        }
+
+
+        .site-info p{
+            font-size: 14px;
+            color: gray;
+            text-align: center;
+            /*padding-left: 60px;/*左填充*/
+            margin:0;
+            margin-top: 10px;
+        }
+
+
+        #footer{
+            margin: auto;
+            width: 960px;
+            border-top: dotted 1px #ccc;
+            margin-top: 20px;
+        }
+
+
+        .site_about{
+            float: left;
+            padding-top: 15px;
+        }
+
+
+        .site_about p{
+            font-size: 16px;
+            color: white;
+        }
+
+
+        .site_link{
+            float: right;
+        }
+
+
+        .site_link ul{
+            list-style: none;
+            margin-top: 30px;
+        }
+
+
+        .site_link ul li{
+            display: inline-block;
+            font-size: 14px;
+            margin-right: 10px;
+            color: white;
+        }
+
+
+        .site_link ul li a{
+            border-radius: 6px;
+            border:solid 1px white;
+            padding: 4px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: white;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+        }
+        .button2:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+    </style>
+</head>
+<body>
+<div id="head">
+    <div class="logo_title">
+        <h1>个人设置</h1>
+        <h2>资料</h2>
+    </div>
+    <div class="navi">
+        <ul>
+            <li><a href = "">首页</a></li>
+            <li><a href = "">闲言碎语</a></li>
+            <li><a href = "">我是谁</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+<div id="wrapper">
+    <div class="main">
+        <div class="item">
+            <div class="item_img">
+                <img src="/img/avatar-0.jpg" height="80px" width="40px">
+            </div>
+            <div class="item_content">
+                <h2>头像设置</h2>
+                <p class="item_info">选择头像文件</p>
+                <p class="item_desc">仅支持jpg、jpeg、png格式的文件<br>
+                </p>
+            </div>
+            <br>
+
+            <button >上传</button>
+            <button>确认</button>
+        </div>
+        <div class="item">
+
+            <div class="item_content">
+                <h3>真实姓名</h3>
+                <p class="item_info">此条无法修改</p>
+                <h3>身份证号</h3>
+                <p class="item_info">此条无法修改</p>
+                <h3>性别</h3>
+                <p class="item_info">此条无法修改</p>
+                <h3>权限等级</h3>
+                <p class="item_info">此条无法修改</p>
+                <h3>昵称：</h3> <input type="text" name="fname" />
+                <input type="submit" value="修改" />
+                <h3>邮箱：</h3> <input type="text" name="fname" />
+                <input type="submit" value="修改" />
+                <h3>电话：</h3> <input type="text" name="fname" />
+                <input type="submit" value="修改" />
+                <h3>密码</h3> <input type="text" name="fname" /><p class="item_info">可用大小写字母、数字和符号，例如“？%￥#</p>
+                <input type="submit" value="修改" />
+
+
+            </div>
+        </div>
+
+
+        <div class="item">
+            <div class="item_img">
+
+            </div>
+            <div class="item_content">
+                <h3>xxxxxxxxxxxxxxxxxx</h3>
+                <p class="item_info">xxxxxxxxxxxxxxxx</p>
+                <p class="item_desc">xxxxxxxxxxxxxx<br>
+                    xxxxxxxxxxxxxxxxx</p>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <div class="item_img">
+
+            </div>
+            <div class="item_content">
+                <h3>xxxxxxxxxxxxxxxxxx</h3>
+                <p class="item_info">xxxxxxxxxxxxxxxx</p>
+                <p class="item_desc">xxxxxxxxxxxxxx<br>
+                    xxxxxxxxxxxxxxxxx</p>
+            </div>
+        </div>
+    </div>
+    <div class="side">
+        <div class="author_info">
+            <div class="author_img">
+                <h2>个人设置</h2>
+            </div>
+            <div class="author_desc">
+                <h4>欢迎回来</h4>
+                <p>杭电考拉欢迎你<br>
+                    祝你考试成功</p>
+            </div>
+        </div>
+        <div class="top_article">
+            <h4>123</h4>
+            <ul>
+                <li>123</li>
+                <li>123</li>
+                <li>123</li>
+                <li>123</li>
+                <li>123</li>
+            </ul>
+            <button class="button button2">更新个人资料</button>
+
+        </div>
+        <div class="site-info">
+            <p>访客：555555</p>
+            <p>文章：666篇</p>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+
+</div>
+
+
+<div id="footer">
+    <div class="site_about">
+        <p>2019 CopyRight 杭电考拉后台</p>
+    </div>
+
+    <div class="clear"></div>
+
+
+</div>
+
+
+
+</body>
+</html>

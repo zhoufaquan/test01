@@ -1,11 +1,18 @@
 package com.example.demo.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 @ToString
-public class Admin {
+@Getter
+@Setter
+public class Admin implements Serializable {
     private Integer aId;
 
     private String aName;
@@ -16,7 +23,7 @@ public class Admin {
 
     private String aPassword;
 
-    private Boolean aLimited;
+    private Integer aLimited;
 
     private String aPhoto;
 
@@ -29,7 +36,9 @@ public class Admin {
     private Date aLst;
 
     private Integer aCount;
-
+    /*角色*/
+    private Set<Role> roles = new HashSet<>();
+    private Set<Authority> permissions = new HashSet<>();
     public Integer getaId() {
         return aId;
     }
@@ -70,11 +79,11 @@ public class Admin {
         this.aPassword = aPassword == null ? null : aPassword.trim();
     }
 
-    public Boolean getaLimited() {
+    public Integer getaLimited() {
         return aLimited;
     }
 
-    public void setaLimited(Boolean aLimited) {
+    public void setaLimited(Integer aLimited) {
         this.aLimited = aLimited;
     }
 

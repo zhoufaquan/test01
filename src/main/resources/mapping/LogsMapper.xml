@@ -7,11 +7,12 @@
     <result column="log_method" property="logMethod" jdbcType="VARCHAR" />
     <result column="log_parm" property="logParm" jdbcType="VARCHAR" />
     <result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
+    <result column="log_userid" property="logUserid" jdbcType="INTEGER" />
     <result column="log_user" property="logUser" jdbcType="VARCHAR" />
     <result column="log_ip" property="logIp" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    log_id, log_operation, log_method, log_parm, log_time, log_user, log_ip
+    log_id, log_operation, log_method, log_parm, log_time, log_userid, log_user, log_ip
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -19,17 +20,20 @@
     from logs
     where log_id = #{logId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from logs
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from logs
     where log_id = #{logId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.entity.Logs" >
     insert into logs (log_id, log_operation, log_method, 
-      log_parm, log_time, log_user, 
-      log_ip)
+      log_parm, log_time, log_userid, 
+      log_user, log_ip)
     values (#{logId,jdbcType=INTEGER}, #{logOperation,jdbcType=VARCHAR}, #{logMethod,jdbcType=VARCHAR}, 
-      #{logParm,jdbcType=VARCHAR}, #{logTime,jdbcType=TIMESTAMP}, #{logUser,jdbcType=VARCHAR}, 
-      #{logIp,jdbcType=VARCHAR})
+      #{logParm,jdbcType=VARCHAR}, #{logTime,jdbcType=TIMESTAMP}, #{logUserid,jdbcType=INTEGER}, 
+      #{logUser,jdbcType=VARCHAR}, #{logIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Logs" >
     insert into logs
@@ -48,6 +52,9 @@
       </if>
       <if test="logTime != null" >
         log_time,
+      </if>
+      <if test="logUserid != null" >
+        log_userid,
       </if>
       <if test="logUser != null" >
         log_user,
@@ -72,6 +79,9 @@
       <if test="logTime != null" >
         #{logTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="logUserid != null" >
+        #{logUserid,jdbcType=INTEGER},
+      </if>
       <if test="logUser != null" >
         #{logUser,jdbcType=VARCHAR},
       </if>
@@ -95,6 +105,9 @@
       <if test="logTime != null" >
         log_time = #{logTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="logUserid != null" >
+        log_userid = #{logUserid,jdbcType=INTEGER},
+      </if>
       <if test="logUser != null" >
         log_user = #{logUser,jdbcType=VARCHAR},
       </if>
@@ -110,6 +123,7 @@
       log_method = #{logMethod,jdbcType=VARCHAR},
       log_parm = #{logParm,jdbcType=VARCHAR},
       log_time = #{logTime,jdbcType=TIMESTAMP},
+      log_userid = #{logUserid,jdbcType=INTEGER},
       log_user = #{logUser,jdbcType=VARCHAR},
       log_ip = #{logIp,jdbcType=VARCHAR}
     where log_id = #{logId,jdbcType=INTEGER}

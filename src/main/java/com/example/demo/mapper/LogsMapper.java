@@ -3,6 +3,8 @@ package com.example.demo.mapper;
 import com.example.demo.entity.Logs;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LogsMapper {
     int deleteByPrimaryKey(Integer logId);
@@ -16,4 +18,6 @@ public interface LogsMapper {
     int updateByPrimaryKeySelective(Logs record);
 
     int updateByPrimaryKey(Logs record);
+
+    List<Logs> selectAll();
 }

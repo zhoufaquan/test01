@@ -7,7 +7,7 @@
     <result column="a_phone" property="aPhone" jdbcType="VARCHAR" />
     <result column="a_mail" property="aMail" jdbcType="VARCHAR" />
     <result column="a_password" property="aPassword" jdbcType="VARCHAR" />
-    <result column="a_limited" property="aLimited" jdbcType="BIT" />
+    <result column="a_limited" property="aLimited" jdbcType="INTEGER" />
     <result column="a_photo" property="aPhoto" jdbcType="VARCHAR" />
     <result column="a_state" property="aState" jdbcType="BIT" />
     <result column="a_ct" property="aCt" jdbcType="TIMESTAMP" />
@@ -15,22 +15,61 @@
     <result column="a_lst" property="aLst" jdbcType="TIMESTAMP" />
     <result column="a_count" property="aCount" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="LimitedMap" type="com.example.demo.entity.Admin" >
+    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="a_name" property="aName" jdbcType="VARCHAR" />
+    <result column="a_phone" property="aPhone" jdbcType="VARCHAR" />
+    <result column="a_mail" property="aMail" jdbcType="VARCHAR" />
+    <result column="a_password" property="aPassword" jdbcType="VARCHAR" />
+    <result column="a_photo" property="aPhoto" jdbcType="VARCHAR" />
+    <result column="a_state" property="aState" jdbcType="BIT" />
+    <result column="a_ct" property="aCt" jdbcType="TIMESTAMP" />
+    <result column="a_st" property="aSt" jdbcType="TIMESTAMP" />
+    <result column="a_count" property="aCount" jdbcType="INTEGER" />
+
+    <collection property="roles"  ofType="com.example.demo.entity.Role">
+      <id column="r_id" property="rId" jdbcType="INTEGER" />
+      <result column="r_role" property="rRole" jdbcType="VARCHAR" />
+      <result column="r_limited" property="rLimited" jdbcType="INTEGER" />
+    </collection>
+    <collection property="permissions" ofType="com.example.demo.entity.Authority">
+      <id column="j_id" property="jId" jdbcType="INTEGER"/>
+      <result column="j_name" property="jName" jdbcType="VARCHAR"/>
+      <result column="j_url" property="jUrl" jdbcType="VARCHAR"/>
+    </collection>
+  </resultMap>
+
   <sql id="Base_Column_List" >
     a_id, a_name, a_phone, a_mail, a_password, a_limited, a_photo, a_state, a_ct, a_st, 
     a_lst, a_count
   </sql>
+  <select id="selectByShiro" resultMap="LimitedMap">
+    select a.a_id,a.a_name,a.a_phone,a.a_mail,a.a_password,a.a_photo,a.a_state,a_ct, a_st,a_count,
+          r.r_id,r.r_role,r.r_limited,au.j_id,au.j_name,au.j_url
+    from admin a
+    inner join role r on a.a_limited=r.r_limited
+    inner join rj on rj.r_id=r.r_id
+    inner join authority au on au.j_id=rj.j_id
+    where  a.a_phone=#{account}
+
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from admin
     where a_id = #{aId,jdbcType=INTEGER}
   </select>
-
+  <select id="selectInfo" resultMap="BaseResultMap"  >
+    select a_name, a_limited,a_photo
+    from admin
+    where ( a_phone=#{account} or a_mail=#{account} )
+  </select>
   <select id="selectToLogin" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
     from admin
-    where a_phone=#{account} or a_mail=#{account} and a_password=#{password}
+    where ( a_phone=#{account} or a_mail=#{account} )and a_password=#{password}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

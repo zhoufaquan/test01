@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.News" >
+    <id column="n_id" property="nId" jdbcType="INTEGER" />
+    <result column="n_title" property="nTitle" jdbcType="VARCHAR" />
+    <result column="n_link" property="nLink" jdbcType="VARCHAR" />
+    <result column="n_date" property="nDate" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.demo.entity.News" extends="BaseResultMap" >
+    <result column="n_text" property="nText" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    n_id, n_title, n_link, n_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    n_text
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    where n_id = #{nId,jdbcType=INTEGER}
+  </select>
+  <select id ="selectTitleAndDate" resultMap="ResultMapWithBLOBs">
+   select <include refid="Base_Column_List" />
+    from news
+    ORDER BY n_date DESC
+    LIMIT 4
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where n_id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.News" >
+    insert into news (n_id, n_title, n_link, 
+      n_date, n_text)
+    values (#{nId,jdbcType=INTEGER}, #{nTitle,jdbcType=VARCHAR}, #{nLink,jdbcType=VARCHAR}, 
+      #{nDate,jdbcType=DATE}, #{nText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_id,
+      </if>
+      <if test="nTitle != null" >
+        n_title,
+      </if>
+      <if test="nLink != null" >
+        n_link,
+      </if>
+      <if test="nDate != null" >
+        n_date,
+      </if>
+      <if test="nText != null" >
+        n_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nTitle != null" >
+        #{nTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="nLink != null" >
+        #{nLink,jdbcType=VARCHAR},
+      </if>
+      <if test="nDate != null" >
+        #{nDate,jdbcType=DATE},
+      </if>
+      <if test="nText != null" >
+        #{nText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.News" >
+    update news
+    <set >
+      <if test="nTitle != null" >
+        n_title = #{nTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="nLink != null" >
+        n_link = #{nLink,jdbcType=VARCHAR},
+      </if>
+      <if test="nDate != null" >
+        n_date = #{nDate,jdbcType=DATE},
+      </if>
+      <if test="nText != null" >
+        n_text = #{nText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where n_id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.entity.News" >
+    update news
+    set n_title = #{nTitle,jdbcType=VARCHAR},
+      n_link = #{nLink,jdbcType=VARCHAR},
+      n_date = #{nDate,jdbcType=DATE},
+      n_text = #{nText,jdbcType=LONGVARCHAR}
+    where n_id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.News" >
+    update news
+    set n_title = #{nTitle,jdbcType=VARCHAR},
+      n_link = #{nLink,jdbcType=VARCHAR},
+      n_date = #{nDate,jdbcType=DATE}
+    where n_id = #{nId,jdbcType=INTEGER}
+  </update>
+</mapper>

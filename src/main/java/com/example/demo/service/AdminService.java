@@ -27,11 +27,21 @@ public class AdminService {
         return date;
     }
 
-    @SystemControllerLog("用户登录")
-    public void setAdminForLogin(Admin admin){
-        admin.setaLst(admin.getaSt());
+
+    public void setAdminForLogin(int id,Date st,int count){
+
+        Admin admin=new Admin();
+        admin.setaId(id);
+        admin.setaLst(st);
         admin.setaSt(getDate());
-        admin.setaCount(admin.getaCount()+1);
-        adminMapper.setAdminForLogin(admin);
+        admin.setaCount(count+1);
+       int i= adminMapper.setAdminForLogin(admin);
+
+    }
+    public Admin getInfo(String account){
+        return adminMapper.selectInfo(account);
+    }
+    public Admin getBean(String account){
+        return adminMapper.selectByShiro(account);
     }
 }

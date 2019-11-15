@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.mapper.AdminMapper;
 import com.example.demo.mapper.TestMapper;
 import com.example.demo.service.AdminService;
+import com.example.demo.service.AuthorityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,19 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class DemoApplicationTests {
     @Autowired
-    private TestMapper testMapper;
-    @Autowired
-    private AdminMapper adminMapper;
+    private AuthorityService authorityService;
+    @Test
+    public void getMenu(){
+        authorityService.getMenu(1);
+        authorityService.getMenu(1);
+    }
+
     @Test
     public void contextLoads() {
-        System.out.println(testMapper.selectByPrimaryKey(1));
+
     }
     @Test
     public void contextLoads2(){
-        System.out.println(adminMapper.selectByPrimaryKey(1));
+
     }
 }

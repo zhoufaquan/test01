@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main-p{
+            width: 60%;
+            margin: 10px auto;
+            padding: 4%;
+            border: 1px solid gainsboro;
+            background: white;
+        }
+        .left-p{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+
+<h1 class="text-capitalize text-black-50 font-weight-normal">个人中心</h1>
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">系统管理</a></li>
+            <li class="breadcrumb-item active">个人中心</li>
+            <li class="breadcrumb-item active">我的信息</li>
+        </ul>
+    </div>
+</div>
+<div class="main-p">
+
+
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputNickname">昵称</label>
+                <input type="text" class="form-control" id="inputNickname" placeholder="Nickname" th:value="${admin.aName}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPhone">账号</label>
+                <input type="text" class="form-control" id="inputPhone" placeholder="Phone" th:value="${admin.aPhone}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">邮箱</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email" th:value="${admin.aMail}">
+        </div>
+        <div class="form-group">
+            <label for="inputLimited">权限</label>
+            <input type="text" class="form-control" id="inputLimited" placeholder="权限" th:value="${role.rRole}">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="inputState">账户状态</label>
+                <input type="text" class="form-control" id="inputState" placeholder="状态" th:value="${admin.aState}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputTime">创建时间</label>
+                <input type="text" class="form-control" id="inputTime" placeholder="创建时间" th:value="${admin.aCt}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" id="inputZip">
+            </div>
+        </div>
+        <div class="left-p">
+        <button type="submit" class="btn btn-primary ">修改</button>
+        <button type="submit" class="btn btn-secondary">返回</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

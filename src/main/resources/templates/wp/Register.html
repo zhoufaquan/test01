@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <style>
+
         .containers {
             width: 80%;
             height: 1000px;
             display: block;
             margin: 80px 10% 0px 10%;
-          /* background: #1b6d85;*/
+            /* background: #1b6d85;*/
         }
 
         .navbar.navbar-default.navbar-fixed-top {
@@ -31,10 +30,10 @@
 
         .top {
             height: 60px;
-
+            width: 100%;
         }
 
-        .ct {
+        .float_left {
             float: left;
         }
 
@@ -42,18 +41,34 @@
             padding: 0px;
             height: 60px;
             line-height: 60px;
-            padding-left: 70px;
-        }
 
+        }
+        .navbar-header{
+            float: right;
+        }
         .topLable {
             height: 60px;
             padding-left: 40px;
             color: #130355;
 
         }
-        .topLable h3{
+
+        .topLable h3 {
             margin-top: 16px;
         }
+
+        .top_right {
+            height: 60px;
+            width: 80%;
+
+        }
+
+        .top_link {
+            width: 7%;
+            /*display: inline;*/
+            float: left;
+        }
+
         .disabled a {
             padding: 0px !important;
             margin-right: 40px;
@@ -61,44 +76,219 @@
             font-size: revert;
         }
 
-        .dropdown-content span a{
-            padding: 0px!important;
+        .dropdown-content span a {
+            padding: 0px !important;
             margin-right: 10px;
         }
-        .headline{
+
+        .headline {
             width: 60%;
             height: 160px;
-         /*   background: gray;*/
-            margin:0 20% 0 20%;
+            /*   background: gray;*/
+            margin: 0 20% 0 20%;
         }
-        .headline span{
-            margin:0 40% 0 40%;
+
+        .headline span {
+            margin: 0 40% 0 40%;
             display: block;
             width: 20%;
             text-align: center;
+            font-size: 20px;
         }
-        .headline h2{
-            margin:24px 20% 0 20%;
+
+        .headline h2 {
+            margin: 24px 20% 0 20%;
             display: block;
             width: 60%;
             text-align: center;
             font-size: 44px;
         }
-        .froms{
+
+        .foot {
+            margin-top: 200px;
+            width: 100%;
+            height: 100px;
+
+        }
+
+        .links {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .links a {
+            color: #666;
+            margin: 0 10px;
+        }
+
+        .froms {
 
             width: 50%;
             height: 800px;
-          /*    background: gray;*/
-            margin:0 25% 0 25%;
+            /*    background: gray;*/
+            margin: 0 25% 0 25%;
 
         }
-        .form-group input{
-           height: 50px;
+
+        .form-group {
+            font-size: 18px;
         }
-        .notice{
+
+        .form-group input {
+            height: 50px;
+        }
+
+        .form-select {
+            height: 50px;
+        }
+
+        .form-submit {
+            background-color: #337ab7;
+            height: 50px;
+            color: white;
+            /*font-weight: bold;*/
+            font-size: 20px;
+        }
+
+        .notice {
+            font-size: 13px;
+        }
+
+        .notice span {
+            color: red;
+        }
+
+        .top_link {
+
+            font-size: 18px;
+            color: #666666;
+            float: right;
+            width: 4%;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .top_link ul li {
+            text-decoration: none;
+            display: inline;
+        }
+
+        .top_link ul li a {
+            /*border-right:1px #aaaaaa solid;*/
+        }
+
+        .container-fluid {
+            width: 15%;
+            height: 60px;
+
+        }
+        .inh{
+            width: 60%;
+            height: 60px;
+            text-align: left;
+            font-size: 24px;
+
+            line-height: 60px;
+
+        }
+        .copyright {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
             font-size: 12px;
+            color: #666;
         }
-        .notice span{
+
+        .bottom {
+            margin-top: 100px;
+            width: 100%;
+            height: 300px;
+            background-color: whitesmoke;
+
+        }
+
+        .bottom_left {
+            width: 32%;
+            height: 300px;
+            float: left;
+        }
+
+        .bottom_element {
+            width: 10%;
+            height: 200px;
+            margin-top: 50px;
+            float: left;
+        }
+
+        .bottom_element h2 {
+            font-size: 20px;
+            color: black;
+            /*font-weight: bold;*/
+        }
+
+        .bottom_element ul li {
+            list-style: none;
+        }
+
+        @font-face {
+            /*自定义的引入名称，定义时需要打上单引号*/
+            font-family: 'myfonts';
+            /*引入路径和格式*/
+            src: url("../fonts/CaviarDreams_BoldItalic.ttf") format('woff');
+        }
+
+        .bottom_element ul li a {
+            font-size: 15px;
+            color: black;
+            font-family: 'myfonts' !important;
+        }
+
+        .link {
+            text-decoration: none;
+        }
+
+        .zxc {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /*.warn{
+            display: none;
+        }*/
+
+
+        .x {
+            display: block;
+            float: left;
+            margin-left: 20px;
+            color: #191970;
+        }
+
+        .top_right{
+            width: 25%;
+            height: 60px;
+            line-height: 60px;
+            font-size: 20px;
+
+        }
+        .x3{
+            display: block;
+            float: right;
+            margin-right: 20px;
+            color: #191970;
+        }
+        .xun{
+            margin-top: 40px;
+        }
+        .checkbox{
+
+
+        }
+        .xeiyi{
+            margin-left: 20px;
             color: red;
         }
     </style>
@@ -108,56 +298,334 @@
 <body>
 <div class="top">
     <nav class="navbar navbar-default   topColor">
-        <div class="container-fluid ct" style="padding: 0px;line-height: 60px!important;">
+        <div class="container-fluid float_left" style="padding: 0px;line-height: 60px!important;">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
                     <img alt="Brand" src="/img/logo5.png" width="120px" height="60px">
                 </a>
             </div>
         </div>
-        <div class="ct topLable">
-          <h3>考啦网欢迎您注册</h3>
-        </div>
+        <div class="float_left inh">
+            <a class="x ">考拉会员注册</a>
 
+
+        </div>
+   <div class=" float_left top_right">
+       <a class="x3" href="/wp/login">登录</a>
+       <a class="x3" href="/wp/HomePage">首页</a>
+
+        </div>
     </nav>
 </div>
 <div class="containers">
-        <div class="headline">
-            <span>祝您考试成功</span>
-            <h2>创建您的账户</h2>
-        </div>
-        <div class="froms">
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">邮箱</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="邮箱可作为账号登录">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">手机号</label>
+    <div class="headline">
+        <span>加入考啦</span>
+        <h2>创建您的账户</h2>
+    </div>
+    <div class="froms">
+        <form action="/wp/toRegister" method="post" onsubmit="return checkRegister()">
 
-                    <input type="text" class="form-control" id="Phone" placeholder="手机号可作为账号登录">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">密码</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码">
-                    <span class="notice">确保它<span>至少包含15个字符</span>或<span>至少8个字符</span>， <span>包括数字和小写字母</span>。了解更多。</span>
-                </div>
+            <div class="form-group">
+                <label> <!--for="exampleInputEmail1">-->手机号</label>
+                <input type="text" class="form-control" id="Phone" name="cTelephone" placeholder="邮箱和手机号均可作为您的登录账号">
+                <div class="warn1 zxc" th:if="${msg}!=null" th:text="${msg}"></div>
+            </div>
+            <div class="form-group">
+                <label> <!--for="exampleInputEmail1">-->邮箱（选填）</label>
+                <input type="text" class="form-control" id="InputEmail" name="cMail" placeholder="邮箱和手机号均可作为您的登录账号">
+                <div class="warn zxc" th:if="${msg2}!=null" th:text="${msg2}"></div>
+            </div>
+            <div class="form-group">
+                <label> <!--for="exampleInputPassword1">-->密码</label>
+                <input type="password" class="form-control" id="InputPassword" name="cPwd" placeholder="密码">
+                <span class="notice">注意:密码长度为8-16位字符，且必须同时包含：字母、数字</span>
+                <div class="warn2 zxc"></div>
 
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Check me out
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+            </div>
+            <div class="form-group">
+                <label> <!--for="exampleInputPassword1">-->密码确认</label>
+                <input type="password" class="form-control" id="verify_password" placeholder="密码确认">
+                <div class="warn3 zxc"></div>
 
-        </div>
+
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="check" >我已阅读并同意<a>《考拉用户协议》</a><small class="xeiyi"></small>
+                </label>
+            </div>
+
+            <div class="form-group xun">
+                <label> <!--for="exampleInputPassword1">-->证件类型（选填）</label>
+                <select id="typeOfID" class="form-control form-select" name="cType">
+                    <option value="0">请选择证件类型</option>
+                    <option value="1">中华人民共和国居民身份证</option>
+                    <option value="2">台湾居民往来大陆通行证</option>
+                    <option value="3">港澳居民来往内地通行证</option>
+                    <option value="4">军人证件</option>
+                    <option value="5">护照</option>
+                    <option value="6">香港身份证</option>
+                    <option value="7">澳门身份证</option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label><!--for="exampInputPassword1"-->证件号（选填）</label>
+                <input type="passwordVerify" class="form-control" id="InputPasswordVerify" name="cIdcard" placeholder="证件号">
+            </div>
+            <div class="form-group">
+                <label> <!--for="exampleInputPassword1"-->姓名（选填）</label>
+                <input type="passwordVerify" class="form-control" id="IPasswordVerify" name="cName" placeholder="请填写真实姓名">
+            </div>
+            <div class="form-group">
+                <label> <!--for="exampleInputPassword1">-->性别（选填）</label>
+                <input type="passwordVerify" class="form-control" id="PasswordVerify" name="cSex" placeholder="性别">
+            </div>
+
+            <button type="submit" class="form-control form-submit">创建账户</button>
+        </form>
+
+    </div>
 </div>
-<div class="bottom">
+<div class="foot">
+    <!-- <div class="bottom_left"><img src="../img/logo.jpg"> </div>-->
+    <div class="links">
+        <a href="#">
+            关于考拉
+        </a>
+        |
+        <a href="#">
+            联系我们
+        </a>
+        |
+        <a href="#">
+            人才招聘
+        </a>
+        |
+        <a href="#">
+            广告服务
+        </a>
+        |
+        <a href="#">
+            微信考拉
+        </a>
+        |
+        <a href="#">
+            侵权投诉
+        </a>
+    </div>
 
+    <div class="copyright">
+        Copyright&nbsp;&copy;&nbsp;2004-2019&nbsp;&nbsp;考拉KL.com&nbsp;版权所有
+    </div>
 </div>
+
 </body>
 <script type="text/javascript">
+
+    $(function () {
+
+        $("#InputEmail").focus(function () {
+            $(".warn").html("")
+        })
+        $("#InputEmail").blur(function () {
+            var imail = $("#InputEmail").val();
+            if (imail == "") {
+                return;
+            } else if (!imail.match(/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)) {
+                $(".warn").html("邮箱格式不正确，请重新填写");
+            }
+        })
+        $("#Phone").focus(function () {
+            $(".warn1").html("")
+        })
+        $("#Phone").blur(function () {
+            var phone=$("#Phone").val()
+            if(phone==""){
+                return;
+            }else if(!phone.match(/^1[34578]\d{9}$/)){
+                $(".warn1").html("手机号格式不正确")
+            }
+        })
+        $("#InputPassword").focus(function () {
+            $(".warn2").html("")
+        })
+        $("#InputPassword").blur(function () {
+            var pwd=$("#InputPassword").val()
+            if(pwd==""){
+                return;
+            }else if(!pwd.match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/)){
+                $(".warn2").html("密码格式不正确")
+            }
+        })
+        $("#verify_password").focus(function () {
+            $(".warn3").html("")
+        })
+        $("#verify_password").blur(function () {
+            var pwd=$("#InputPassword").val()
+            var pwd2=$("#verify_password").val()
+            if(pwd2==""){
+                return;
+            }else if(pwd!=pwd2){
+                $(".warn3").html("两次输入密码不正确")
+            }
+        })
+        $("#check").click(function () {
+            var checked=$("#check").attr("checked")
+
+            if($(this).is(":checked")){
+                $(".xeiyi").html("")
+            }
+        })
+
+    })
+
+    function checkRegister() {
+
+        var imail = $("#InputEmail").val();
+        var iphone = $("#Phone").val();
+        var ipassward = $("#InputPassword").val();
+        var rpassward = $("#verify_password").val();
+
+
+        if(iphone==""||ipassward==""||rpassward==""){
+            alert("请填写个人信息")
+            return false;
+        }else if(!$("#check").is(":checked")){
+            $(".xeiyi").html("同意用户协议之后方能注册")
+            return false;
+        }else if(imail!=""&&!imail.match(/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)) {
+            $(".warn").html("邮箱格式不正确，请重新填写");
+            return false;
+        }else if(!iphone.match(/^1[34578]\d{9}$/)){
+
+            return false;
+        }else if(!ipassward.match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/)){
+
+            return false;
+        }else if(ipassward!=rpassward){
+
+            return false;
+        }
+
+    }
+
+</script>
+<script type="text/javascript">
+
+    /*function   checkEmail(mail){
+        if(mail = ""){
+            $(".warn").removeClass("displays");
+            return false;
+        }else if(!mail.match(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/) ){
+            $(".warn").addClass("displays");
+            $(".warn").html("邮箱格式不正确，请重新填写");
+            return false;
+        }
+
+    }*/
+    /* $(document).ready(function () {
+        /!*    var text = $(".warn").text();
+            var text1 = $(".warn1").text();
+            var text2 = $(".warn2").text();
+            var text3 = $(".warn3").text();
+
+            if (text != ""&&text1 != ""&&text2 != ""&&text3 != ""){
+                $(".warn").addClass("displays");
+                $(".warn1").addClass("displays");
+                $(".warn2").addClass("displays");
+                $(".warn3").addClass("displays");
+            }*!/
+            $("#InputEmail").bind("focus",function () {
+                   $(".warn").removeClass("displays");
+               })
+            $("#Phone").bind("focus",function(){
+                $(".warn1").removeClass("displays");
+            })
+            $("#verify_password").bind("focus",function(){
+                $(".warn3").removeClass("displays");
+            })
+
+            $("#InputEmail").bind("focus",function(){
+                $(".warn").removeClass("displays");
+            });
+            $("#InputPassword").bind("focus",function(){
+                $(".warn2").removeClass("displays");
+            });
+
+        })*/
+    /*  $(document).ready(function checkRegister(){
+          var mail = $("#InputEmail").value();
+          var telephone = $("#Phone").val();
+          var password = $("#InputPassword").val();
+          var pwd = $("#verify_password").val();
+          $("#InputEmail").onblur(function () {
+              if(mail = ""){
+                  /!*$(".warn").removeClass("displays");*!/
+                  return false;
+              }else if(!mail.match(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/) ){
+                  $(".warn").addClass("displays");
+                  $(".warn").html("邮箱格式不正确，请重新填写");
+              return false;
+              }else{
+                  $(".warn").hide();
+              }
+          });
+
+          $("#InputEmail").focus(function () {
+              $(".warn").removeClass("displays");
+          })
+
+      })*/
+    /*
+        function checkRegister() {
+            var mail = $("#InputEmail").val();
+            console.log(mail)
+            var telephone = $("#Phone").val();
+            var password = $("#InputPassword").val();
+            var pwd = $("#verify_password").val();
+
+            if (mail=="") {
+                $(".warn").addClass("displays");
+                $(".warn").html("邮箱不能为空");
+                return false;
+            }else if (!mail.match(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
+                $(".warn").addClass("displays");
+                $(".warn").html("邮箱格式不正确");
+                return false;
+            }else if(telephone==""){
+                $(".warn1").addClass("displays");
+                $(".warn1").html("电话号码不能为空");
+                return false;
+            }else if (!telephone.match(/^1[34578]\d{9}$/)){
+                $(".warn1").addClass("displays");
+                $(".warn1").html("电话号码格式不正确");
+                return false;
+            }else if(password == ""){
+                $(".warn3").addClass("displays");
+                $(".warn3").html("密码不能为空");
+                return false;
+            }else if(password <=6 ||password >= 15 ){
+                $(".warn3").addClass("displays");
+                $(".warn3").html("密码应该为6-15个数字组成");
+                return false;
+            }else if(pwd ==""){
+
+                $(".warn2").addClass("displays");
+                $(".warn2").html("请确认密码");
+                return false;
+            }else if(password!=pwd){
+                console.log("进入")
+
+                $(".warn2").addClass("displays");
+                $(".warn2").html("输入密码不一致");
+                return false;
+            }else {
+                console.log("qweqwe")
+                return true;
+            }
+
+        }
+    */
 
 
 </script>

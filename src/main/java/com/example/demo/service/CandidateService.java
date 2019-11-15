@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Admin;
 import com.example.demo.entity.Candidate;
 import com.example.demo.mapper.CandidateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,8 @@ public class CandidateService {
     private CandidateMapper candidateMapper;
 
     public Map<String, String> toSign(Candidate candidate) {
-
         Map<String, String> map = new HashMap<>(3);
-
-
-
         int id=candidateMapper.selectByPhone(candidate.getcTelephone());
-
-
         if (id !=0) {
             /*账号存在 开始登录*/
             Candidate  candidate1= candidateMapper.selectToLogin(candidate);
@@ -33,7 +28,6 @@ public class CandidateService {
                 /*密码错误*/
                 map.put("msg","2");
             }
-
         } else {
             /*注册*/
             String str=random();
@@ -46,9 +40,47 @@ public class CandidateService {
             }
         }
         map.put("telephone", candidate.getcTelephone());
-
-
         return map;
+    }
+    public Candidate WpLogin(String account,String pwd){
+
+        return candidateMapper.WpLogin(account,pwd);
+    }
+
+    public String getNickname(String account){
+        return candidateMapper.selectToNickname(account);
+    }
+
+    public int doRegister(Candidate candidate){
+
+        int id=candidateMapper.selectByPhone(candidate.getcTelephone());
+        int mark=0;
+        if(candidate.getcMail()!=""){
+            mark=candidateMapper.selectByMail(candidate.getcMail());
+        }
+        if (id !=0) {
+            /*账号存在  返回1*/
+            return 1;
+
+        } else {
+            /*注册*/
+            /*mark==0 表示不用注册邮箱 邮箱为空 邮箱在数据库中不存在*/
+            if(mark==0) {
+                String str = random();
+                candidate.setcNickname(str);
+                int flag = candidateMapper.insertSelective(candidate);
+                if (flag == 1) {
+                    /*注册成功 返回0*/
+                    return 0;
+                }
+            }else {
+                /*邮箱在数据库中存在 不予注册 */
+                return 2;
+            }
+        }
+
+
+        return 0;
     }
 
     public String random() {
@@ -63,7 +95,6 @@ public class CandidateService {
         for (int i = 0; i < 9; i++) {
             res += num[ran.nextInt(10)];
         }
-
         return res;
     }
 }

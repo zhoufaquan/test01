@@ -1,5 +1,8 @@
+/*
 package com.example.demo.controller.Interceptor;
 
+import com.example.demo.entity.Admin;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,15 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String account = (String) request.getSession().getAttribute("ACCOUNT");
-        //System.out.println(account);
-        if(account!=null){
+       // String account = (String) request.getSession().getAttribute("ACCOUNT");
+
+
+
+        if( SecurityUtils.getSubject().getPrincipal()!=null){
             return true;
         }else {//未登录
             //直接重定向到登录页面
             response.sendRedirect(request.getContextPath()+"/bs/login");
             return false;
         }
+
 
     }
 
@@ -32,3 +38,4 @@ public class MyInterceptor implements HandlerInterceptor {
        // System.out.println("after");
     }
 }
+*/

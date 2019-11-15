@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<style>
+    .logsUl li {
+        float: left;
+        list-style: none;
+        line-height: 31px;
+        font-size: 14px;
+        margin-right: 4px;
+    }
+
+    .nav-page {
+        float: right;
+
+    }
+
+    .page-link {
+
+    }
+
+    .pagination-sm {
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+
+    .tab-f {
+        width: 100%;
+        height: 31px;
+
+    }
+
+    .ct {
+        float: left;
+    }
+
+    .btn-f1 {
+        text-align: center;
+        border-radius: 0.25rem;
+        vert-align: middle;
+        line-height: 15px !important;
+        height: 31px;
+    }
+
+    .ta-log {
+        width: 93%;
+
+        text-align: center;
+    }
+    .ta-log-left{
+
+        width: 93%;
+        height: 60px;
+    }
+    .fax{
+        border-radius: 0.25rem!important;
+
+    }
+    .warn15{
+        width: 30%;
+        max-width: 300px;
+        position:absolute;
+        height: 40px;
+        color:white;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 5px;
+        transition: 2s;
+        top: 10%;
+        left: 40%;
+        z-index: 999999;
+        background: #c9302c;
+        font-size: 12px;
+    }
+</style>
+<body>
+<h1 class="text-capitalize text-black-50 font-weight-normal">系统日志</h1>
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">系统管理</a></li>
+            <li class="breadcrumb-item active">系统日志</li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="ta-log">
+    <div class="card">
+        <div class="card-header">
+            <h4>系统操作日志表</h4>
+        </div>
+        <div class="card-body">
+            <div class="ta-log-left">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-danger  ml-2" ><i class="fa fa-trash"></i>&nbsp;批量删除</button>
+                </form>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox">
+                        </th>
+                        <th scope="col">#</th>
+                        <th scope="col">操作</th>
+                        <th scope="col">日期</th>
+                        <th scope="col">操作id</th>
+                        <th scope="col">操作者</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="item,start:${logs}" th:data-logsid="${item.logId}">
+                        <th>
+                           <input type="checkbox" >
+                        </th>
+                        <th scope="row" th:text="${start.index+1}">#</th>
+                        <td th:text="${item.logOperation}">操作</td>
+                        <td th:text="${item.logTime}">日期</td>
+                        <td th:text="${item.logUserid}"></td>
+                        <td th:text="${item.logUser}">操作者</td>
+                        <td>
+                            <button class="btn btn-success btn-sm fax btn-detail" data-toggle="modal" data-target=""><li class="fa fa-check "></li></button>
+
+                            <button class="btn btn-danger btn-sm fax" ><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+                <div CLASS="tab-f">
+                    <ul class="logsUl">
+                        <li>共 &nbsp;<a th:text="${pageInfo.total}"></a>&nbsp;条</li>
+                        <li>|</li>
+                        <li>每页&nbsp;5&nbsp;条</li>
+                        <li>|</li>
+                        <li>共&nbsp;<a th:text="${pageInfo.pages}"></a>&nbsp;页</li>
+                    </ul>
+
+                    <nav aria-label="Page navigation example" class="nav-page">
+                        <button type="button" id="first" class="btn btn-outline-primary ct btn-f1"
+                                th:data-url="@{/bs/logs}">首页
+                        </button>
+                        <ul class="pagination pagination-sm ct">
+                            <li class="page-item" id="up"
+                                th:data-url="@{/bs/logs(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#"
+                                                            th:text="${pageInfo.pageNum}">1</a></li>
+
+                            <li class="page-item" id="next"
+                                th:data-url="@{/bs/logs(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <button type="button" id="last" class="btn btn-outline-primary ct btn-f1"
+                                th:data-url="@{/bs/logs(pageNum=${pageInfo.pages})}">尾页
+                        </button>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">日志详情</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputLogsId">日志id</label>
+                            <input type="text" class="form-control" id="inputLogsId" placeholder="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputLogsOp">操作</label>
+                            <input type="password" class="form-control" id="inputLogsOp" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMethod">操作方法</label>
+                        <input type="text" class="form-control" id="inputMethod" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputParm">操作参数</label>
+                        <input type="text" class="form-control" id="inputParm" placeholder="">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputTime">操作时间</label>
+                            <input type="text" class="form-control" id="inputTime">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputUser">操作账户</label>
+                            <input type="text" class="form-control" id="inputUser">
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputIp">操作ip</label>
+                            <input type="text" class="form-control" id="inputIp">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputUserId">操作id</label>
+                            <input type="text" class="form-control " id="inputUserId">
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert alert-danger fade in">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>警告框标题</strong> 提交失败！
+</div>
+
+<script src="/js/logs.js"></script>
+<script>
+    function Toast(msg,duration){
+        duration=isNaN(duration)?3000:duration;
+        var m = document.createElement('div');
+        m.innerHTML = msg;
+        m.className="warn15"
+
+        document.body.appendChild(m);
+        setTimeout(function() {
+            var d = 0.5;
+            m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+            m.style.opacity = '0';
+            setTimeout(function() { document.body.removeChild(m) }, d * 1000);
+        }, duration);
+    }
+    $(function () {
+        $(".btn-danger").click(function () {
+            var logsid=$(this).parents("tr").attr("data-logsid")
+
+            $.ajax({
+                url:"/bs/logsdel",
+                type:"GET",
+                dataType:"text",
+                contentType:"application/json",
+                data:{"logs_id":logsid},
+                success:function (m) {
+
+                    if(m==1){
+                     $("#contents").load("/bs/logs") /*都用这个*/
+                    }else if(m==0){
+
+                    }else{
+                        Toast("你的级别还不够高,加油吧！少年。","2000")
+                    }
+                }
+            })
+        })
+        $(".btn-detail").click(function () {
+            var logsid=$(this).parents("tr").attr("data-logsid")
+            var flag=0;
+            $.ajax({
+                url: "/bs/logsSel",
+                type: "GET",
+                dataType: "json",
+                async:false,
+                contentType: "application/json",
+                data: {"logs_id": logsid},
+                success: function (m) {
+
+                    if(m!=null){
+                        if(m.logId==logsid){
+                            console.log(m.logId)
+                           $("#inputLogsId").attr("placeholder",m.logId)
+                            $("#inputLogsOp").attr("placeholder",m.logOperation)
+                            $("#inputMethod").attr("placeholder",m.logMethod)
+                            $("#inputParm").attr("placeholder",m.logParm)
+                            $("#inputTime").attr("placeholder",m.logTime)
+                            $("#inputUser").attr("placeholder",m.logUser)
+                            $("#inputIp").attr("placeholder",m.logIp)
+                            $("#inputUserId").attr("placeholder",m.logUserid)
+
+                          flag=1;
+                        }else{
+                            Toast("你的级别还不够高,加油吧！少年。","2000")
+                        }
+                    }
+                    console.log("执行")
+                }
+
+            })
+
+            if(flag==1){
+                console.log("sfedfedf")
+                $(this).attr("data-target","#exampleModalCenter")
+            }
+        })
+
+    })
+</script>
+</body>
+</html>

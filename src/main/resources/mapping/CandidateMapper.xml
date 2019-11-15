@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.CandidateMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Candidate" >
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_nickname" property="cNickname" jdbcType="VARCHAR" />
+    <result column="c_mail" property="cMail" jdbcType="VARCHAR" />
+    <result column="c_telephone" property="cTelephone" jdbcType="VARCHAR" />
+    <result column="c_pwd" property="cPwd" jdbcType="VARCHAR" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_idcard" property="cIdcard" jdbcType="VARCHAR" />
+    <result column="c_image" property="cImage" jdbcType="VARCHAR" />
+    <result column="c_sex" property="cSex" jdbcType="VARCHAR" />
+    <result column="c_type" property="cType" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_nickname, c_mail, c_telephone, c_pwd, c_name, c_idcard, c_image, c_sex,c_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from candidate
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <select id="selectToLogin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from candidate
+    where c_telephone=#{cTelephone} and c_pwd=#{cPwd}
+  </select>
+  <select id="selectByPhone" resultType="INTEGER">
+    select count(c_id)
+    from candidate
+    where c_telephone=#{telephone}
+  </select>
+  <select id="selectByMail" resultType="INTEGER">
+    select count(c_id)
+    from candidate
+    where c_mail=#{mail}
+  </select>
+  <select id="selectToNickname" resultType="string">
+    select c_nickname from candidate
+    where (c_telephone=#{account} or c_mail=#{account})
+  </select>
+  <select id="WpLogin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from candidate
+    where (c_telephone=#{account} or c_mail=#{account})and c_pwd =#{pwd}
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from candidate
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Candidate" >
+    insert into candidate (c_id, c_nickname, c_mail, 
+      c_telephone, c_pwd, c_name, 
+      c_idcard, c_image, c_sex
+      )
+    values (#{cId,jdbcType=INTEGER}, #{cNickname,jdbcType=VARCHAR}, #{cMail,jdbcType=VARCHAR}, 
+      #{cTelephone,jdbcType=VARCHAR}, #{cPwd,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, 
+      #{cIdcard,jdbcType=VARCHAR}, #{cImage,jdbcType=VARCHAR}, #{cSex,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Candidate" >
+    insert into candidate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cNickname != null" >
+        c_nickname,
+      </if>
+      <if test="cMail != null" >
+        c_mail,
+      </if>
+      <if test="cTelephone != null" >
+        c_telephone,
+      </if>
+      <if test="cPwd != null" >
+        c_pwd,
+      </if>
+      <if test="cName != null" >
+        c_name,
+      </if>
+      <if test="cIdcard != null" >
+        c_idcard,
+      </if>
+      <if test="cImage != null" >
+        c_image,
+      </if>
+      <if test="cSex != null" >
+        c_sex,
+      </if>
+      <if test="cType != null" >
+        c_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cNickname != null" >
+        #{cNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="cMail != null" >
+        #{cMail,jdbcType=VARCHAR},
+      </if>
+      <if test="cTelephone != null" >
+        #{cTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="cPwd != null" >
+        #{cPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cIdcard != null" >
+        #{cIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="cImage != null" >
+        #{cImage,jdbcType=VARCHAR},
+      </if>
+      <if test="cSex != null" >
+        #{cSex,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        #{cType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Candidate" >
+    update candidate
+    <set >
+      <if test="cNickname != null" >
+        c_nickname = #{cNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="cMail != null" >
+        c_mail = #{cMail,jdbcType=VARCHAR},
+      </if>
+      <if test="cTelephone != null" >
+        c_telephone = #{cTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="cPwd != null" >
+        c_pwd = #{cPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cIdcard != null" >
+        c_idcard = #{cIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="cImage != null" >
+        c_image = #{cImage,jdbcType=VARCHAR},
+      </if>
+      <if test="cSex != null" >
+        c_sex = #{cSex,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        c_type = #{cType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Candidate" >
+    update candidate
+    set c_nickname = #{cNickname,jdbcType=VARCHAR},
+      c_mail = #{cMail,jdbcType=VARCHAR},
+      c_telephone = #{cTelephone,jdbcType=VARCHAR},
+      c_pwd = #{cPwd,jdbcType=VARCHAR},
+      c_name = #{cName,jdbcType=VARCHAR},
+      c_idcard = #{cIdcard,jdbcType=VARCHAR},
+      c_image = #{cImage,jdbcType=VARCHAR},
+      c_sex = #{cSex,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>

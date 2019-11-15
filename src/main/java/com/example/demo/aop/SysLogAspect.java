@@ -13,6 +13,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +23,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
@@ -72,11 +74,20 @@ public class SysLogAspect {
 
 
         sysLog.setLogTime(new Date());
-        //获取用户名
-        //获取用户ip地址
-
         HttpServletRequest request = HttpClientUtils.getHttpServletRequest();
-        sysLog.setLogUser(String.valueOf(request.getSession().getAttribute("USERNAME")));
+
+        String account=String.valueOf(request.getSession().getAttribute("ACCOUNT"));
+        Integer ids=(Integer) request.getSession().getAttribute("ID");
+
+        if(account!="null") {
+
+            sysLog.setLogUser(account);
+            sysLog.setLogUserid(ids);
+        }else {
+
+            sysLog.setLogUser("异常");
+            sysLog.setLogUserid(-1);
+        }
         sysLog.setLogIp(IpUtils.getIpAddr(request));
 
         logsService.insert(sysLog);
@@ -86,7 +97,8 @@ public class SysLogAspect {
         Object[] res = new Object[args.length];
         int j = 0;
         for (int i = 0; i < args.length; i++) {
-            if (args[i] instanceof ServletRequest || args[i] instanceof ServletResponse || args[i] instanceof MultipartFile) {
+            if (args[i] instanceof ServletRequest || args[i] instanceof ServletResponse || args[i] instanceof MultipartFile || args[i] instanceof Model
+                    || args[i] instanceof HttpSession) {
                 continue;
             } else {
                 res[j] = args[i];

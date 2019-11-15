@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
+</head>
+<style>
+    .main-u {
+        margin: 20px auto;
+        width: 96%;
+    }
+
+    /*----------用来移除叉叉按钮----------*/
+    input[type="date"]::-webkit-clear-button {
+        display: none;
+    }
+
+    input[type="date"]::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    input[type=date]::-webkit-inner-spin-button {
+        visibility: hidden;
+    }
+    .ta-log-left{
+
+        width: 93%;
+        height: 60px;
+    }
+
+
+</style>
+<script type="text/javascript" src="/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
+<body>
+
+<h1 class="text-capitalize text-black-50 font-weight-normal">用户管理</h1>
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">系统管理</a></li>
+            <li class="breadcrumb-item active">用户管理</li>
+        </ul>
+    </div>
+</div>
+<div class="main-u">
+
+
+    <div class="ta-log-left">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="昵称/手机号/邮箱" aria-label="Search">
+            <input id="meeting" type="date" class="form-control mr-sm-2" />
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+
+        </form>
+
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">
+                <input type="checkbox">
+            </th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">
+                <input type="checkbox">
+            </th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+
+</script>
+</body>
+
+
+</html>

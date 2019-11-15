@@ -34,12 +34,14 @@ public class LoginController {
                 redirectAttributes.addAttribute("i",0);
                 return "redirect:login";
             }else{
+                /*登录成功*/
+                request.getSession().setAttribute("account",account);
                 return "redirect:HomePage";
             }
         }else {
             redirectAttributes.addAttribute("i",1);
             return "redirect:login";
         }
-
     }
+
 }

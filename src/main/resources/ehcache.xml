@@ -1,0 +1,66 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" maxBytesLocalHeap="500M">
+    <diskStore path="E:\2019 junior\java\web\d2\demo\src\main\resources\static\test"/>
+    <defaultCache
+
+            eternal="false"
+
+            maxElementsInMemory="1000"
+
+            overflowToDisk="false"
+
+            diskPersistent="false"
+
+            timeToIdleSeconds="0"
+
+            timeToLiveSeconds="10"
+
+            memoryStoreEvictionPolicy="LRU"/>
+
+
+    <!-- 这里的 users 缓存空间是为了下面的 demo 做准备 -->
+
+    <cache
+            name="users"
+
+            eternal="false"
+
+            maxElementsInMemory="100"
+
+
+            overflowToDisk="false"
+
+            diskPersistent="false"
+
+            timeToIdleSeconds="0"
+
+            timeToLiveSeconds="360"
+            statistics="true"
+
+            memoryStoreEvictionPolicy="LRU"/>
+
+    <!-- 授权缓存 -->
+    <cache name="authorizationCache"
+           maxElementsInMemory="100"
+
+           eternal="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="10"
+           overflowToDisk="false"
+           statistics="true"
+           memoryStoreEvictionPolicy="LRU">
+    </cache>
+
+    <!-- 认证缓存 -->
+    <cache name="authenticationCache"
+           maxElementsInMemory="100"
+
+           eternal="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="10"
+           overflowToDisk="false"
+           statistics="true"
+           memoryStoreEvictionPolicy="LRU">
+    </cache>
+
+</ehcache>

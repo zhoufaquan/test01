@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>HomePage</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
     <style>
         .containers {
             width: 100%;
-            height: 1000px;
-            background: #1b6d85;
+            height: 900px;
+
         }
 
         .navbar.navbar-default.navbar-fixed-top {
@@ -19,11 +20,10 @@
             line-height: 60px !important;
             margin: 0px;
 
-
         }
 
         .topColor {
-            background:;
+
         }
 
         .top {
@@ -32,49 +32,232 @@
         }
 
         .ct {
-        float: left;
+            float: left;
         }
 
         .navbar-brand {
             padding: 0px;
             height: 60px;
             line-height: 60px;
-            padding-left: 70px;
-        }
 
+        }
+        .navbar-header{
+            float: right;
+        }
         .topLable {
             height: 60px;
-            padding-left: 80px;
-            line-height: 60px;
-        }
 
-        .disabled a {
+            line-height: 60px;
+            width: 65%;
+        }
+        .container-fluid{
+            width: 15%
+        }
+        .nava{
+            width: 14%;
+        }
+        .nava a {
             padding: 0px !important;
-            margin-right: 80px;
+            text-align: center;
             color: midnightblue !important;
-            font-size: revert;
+
+            font-size: 14px;
         }
 
         .dropdown {
             position: relative;
             display: inline-block;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
             min-width: 100px;
-            width: 100px!important;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            width: 100px !important;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             padding: 0px 16px;
 
         }
+
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .dropdown-content span a{
-            padding: 0px!important;
+
+        .dropdown-content span a {
+            padding: 0px !important;
             margin-right: 10px;
+        }
+        .jumbotron{
+
+            height: 400px;
+            width: 100%;
+            background-image: url("/img/homepage5.jpg") ;
+            background-size: 100% ;
+        }
+        .conn{
+            width: 100%;
+            height: 402px;
+            background: white;
+            border-top:1px solid gainsboro ;
+            border-bottom: 1px solid gainsboro;
+        }
+
+        .news{
+            margin-left: 10%;
+        }
+        .newT{
+            color: black;
+            font-size: 32px!important;
+        }
+
+        .newlist{
+            margin-top: 40px;
+        }
+        .newlist li{
+           height: 30px;
+        }
+        .newM{
+            margin-left: 40%;
+        }
+        .newM1{
+            margin-top: 10px;
+            margin-left: 80%;
+        }
+        .guide2{
+            margin-left: 60px;
+            height:280px;
+            width: 20%;
+
+          }
+        .fun4-title{
+            height: 80px;
+            width: 100%;
+           border-bottom: 1px solid gainsboro;
+
+        }
+        .fun4-title img{
+            height: 50px;
+            width: 50px;
+            margin-left: 34px   ;
+            margin-top:20px;
+        }
+        .fun4-title h3{
+            margin-top:30px;
+            margin-left: 7px
+        }
+        .list1
+        {
+            height: 180px;
+            width: 100%;
+        }
+        .list1 tr{
+            height: 20px;
+        }
+        .list1 tr td{
+            text-align: center;
+
+        }
+        .btn{
+            width: 80% !important;
+        }
+        .guide1{
+            margin-left: 175px;
+            height:400px;
+            width: 50%;
+
+        }
+        .list2{
+            width:100%;
+            height:180px;
+            margin-top: 10px;
+            /*background-color: #31708f;*/
+            font: 14px "Microsoft YaHei", 宋体, san-serif;
+            color: #646464;
+        }
+        .fun1-title{
+            height:25%;
+            weight:100%;
+        }
+        .fun2-title{
+            height:25%;
+            weight:100%;
+        }
+        .fun3-title{
+              height:25%;
+              weight:100%;
+          }
+        .fun1-title{
+            margin-top: 10px;
+        }
+        .fun1-title img{
+            width:50px;
+            height:50px;
+            margin-left:7%;
+
+        }
+        .fun1-title h3{
+            line-height: 3px;
+            font-size: 22px;
+            margin-left: 6px;
+        }
+        .fun2-title img{
+            width:50px;
+            height:50px;
+            margin-left:7%;
+
+        }
+        .fun2-title h3{
+            margin-left: 6px;
+            line-height: 3px;
+            font-size: 22px;
+        }
+        .fun3-title img{
+            width:50px;
+            height:50px;
+            margin-left:7%;
+
+        }
+        .fun3-title h3{
+            margin-left: 6px;
+            line-height: 3px;
+            font-size: 22px;
+        }
+        .list3{
+            width: 49.5%;
+            height:180px;
+            margin-top:20px;
+            /*background-color: #1b6d85;*/
+            font: 14px "Microsoft YaHei", 宋体, san-serif;
+            color: #646464;
+        }
+        .list4{
+            width: 49.5%;
+            height:180px;
+            margin-top:20px;
+            margin-left: 1%;
+            font: 14px "Microsoft YaHei", 宋体, san-serif;
+            color: #646464;
+                /*background-color: #ffff00;*/
+        }
+        .fun1-news{
+            margin-left: 30px;
+            line-height: 20px;
+            display: block;
+            margin-top: 10px;
+        }
+        .account{
+            width: 20%;
+
+        }
+        .names{
+
+
+        }
+        .out{
+
+
+         margin-left: 10px;
         }
     </style>
 
@@ -93,35 +276,89 @@
         <div class="ct topLable">
             <ul class="nav nav-pills">
 
-                <li role="presentation" class="disabled"><a href="#">首页</a></li>
-                <li role="presentation" class="disabled"><a href="#">咨询中心</a></li>
-                <li role="presentation" class="disabled"><a href="#">考试大纲</a></li>
-                <li role="presentation" class="disabled"><a href="#">考试咨询</a></li>
-                <li role="presentation" class="disabled"><a href="#">相关下载</a></li>
-                <li role="presentation" class="disabled"><a href="#">考生服务<span class="glyphicon glyphicon-menu-down"
-                                                                               style="margin-left: 4px"></span></a></li>
-                <li role="presentation" class="disabled dropdown">
-                    <a href="#" >考试咨询</a>
+                <li role="presentation" class="nava"><a href="#">首页</a></li>
+                <li role="presentation" class="nava"><a href="#">咨询中心</a></li>
+                <li role="presentation" class="nava"><a href="#">考试大纲</a></li>
+                <li role="presentation" class="nava"><a href="#">考试咨询</a></li>
+                <li role="presentation" class="nava"><a href="#">相关下载</a></li>
+                <li role="presentation" class="nava dropdown">
+                    <a href="www.baidu.com">考生服务<span class="glyphicon glyphicon-menu-down"
+                                          style="margin-left: 6px"></span></a>
                     <div class="dropdown-content">
                         <span><a href="#">考试报名</a></span>
                         <span><a href="#">考试报名</a></span>
                         <span><a href="#">考试报名</a></span>
                         <span><a href="#">考试报名</a></span>
                     </div>
-                    </li>
-                <li role="presentation" class="disabled"><a href="#">常见问题</a></li>
+                </li>
+                <li role="presentation" class="nava"><a href="#">常见问题</a></li>
             </ul>
         </div>
-
+        <div class="ct account" th:if="${nickname}!=null">
+            <span class="names" >hi,<a th:text="${nickname}"></a></span>
+            <a class="out">退出登录</a>
+        </div>
     </nav>
 </div>
 <div class="containers">
-    <div class="jumbotron" style="height: 400px">
-        <h1>Hello, world!</h1>
-        <p>...</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+
+    <div class="jumbotron" >
+        <div class = "news" >
+            <p  class="newT">2019年杭州电子科技大学信息工程学院职称考试</p>
+          <!--  <p class="newpaper"> &nbsp;&nbsp;&nbsp;&nbsp;
+                杭州电子科技大学信息工程学院即将开启职称考试，各位考生可以根据自己的需求参加相应的考试；职称考试
+                <br>包括计算机等级考试、英语等级考试、会计CPA考试，欢迎同学们踊跃报名,我们将为您提供最好的考试服务；以下
+                <br>为您提供最新考试资讯：
+
+            </p>-->
+              <ul class="newlist">
+                  <li  th:each="item:${news}" ><a th:href="'News/'+${item.nId}" th:text="${item.nTitle}" target="_blank"></a></li>
+              </ul>
+                <a class="newM" href="">更多＞＞</a>
+        </div>
     </div>
 
+    <div class ="guide1 ct" >
+    <div class="list2">
+        <div class="fun1-title"><img src="/img/icon1.png" class="ct"><h3 class="ct">考试大纲</h3> </div>
+        <div class="fun1-news">  &nbsp;&nbsp;&nbsp;&nbsp;杭州电子科技大学信息工程学院即将开启职称考试，各位考生可以根据自己的需求参加相应的考试；职称考试
+            包括计算机等级考试、英语等级考试、会计CPA考试，欢迎同学们踊跃报名,我们将为您提供最好的考试服务；以下
+            为您提供最新考试资讯：</div>
+        <a class="newM1" href="">更多＞＞</a>
+    </div>
+        <div class="list3 ct">
+            <div class="fun2-title"> <img src="/img/icon2.png" class="ct"><h3 class="ct">考试介绍</h3></div>
+            <div class="fun1-news"> &nbsp;&nbsp;&nbsp;&nbsp; 杭州电子科技大学信息工程学院即将开启职称考试，各位考生可以根据自己的需求参加相应的考试；职称考试
+            包括计算机等级考试、英语等级考试、会计CPA考试，欢迎同学们踊跃报名,我们将为您提供最好的考试服务；以下
+            为您提供最新考试资讯：</div>
+            <a class="newM1" href="">更多＞＞</a>
+        </div>
+        <div class="list4 ct">
+            <div class="fun3-title"><img src="/img/icon3.png" class="ct"><h3 class="ct">考生须知</h3> </div>
+            <div class="fun1-news"> &nbsp;&nbsp;&nbsp;&nbsp; 杭州电子科技大学信息工程学院即将开启职称考试，各位考生可以根据自己的需求参加相应的考试；职称考试
+            包括计算机等级考试、英语等级考试、会计CPA考试，欢迎同学们踊跃报名,我们将为您提供最好的考试服务；以下
+            为您提供最新考试资讯：</div>
+            <a class="newM1" href="">更多＞＞</a>
+        </div>
+    </div>
+    <div class="guide2 ct ">
+
+        <div class="fun4-title"><img src="/img/icon04.png" class="ct"><h3 class="ct ">考生服务</h3></div>
+        <table class="list1">
+            <tr >
+                <td><a href="/wp/Register"><button class="btn btn-info">考生注册</button></a></td>
+                <td><a href="/wp/login"><button class="btn btn-danger" >考试登录</button></a></td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-warning">考试报名</button></td>
+                <td><button class="btn btn-primary">考试查询</button></td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-light">个人信息</button></td>
+                <td><button class="btn btn-success">成绩查询</button></td>
+            </tr>
+        </table>
+    </div>
 </div>
 <div class="bottom"></div>
 </body>

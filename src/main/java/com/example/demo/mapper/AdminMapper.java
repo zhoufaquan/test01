@@ -13,10 +13,13 @@ public interface AdminMapper {
     int insertSelective(Admin record);
 
     Admin selectByPrimaryKey(Integer aId);
+    Admin selectInfo(String  account);
     Admin selectToLogin(@Param("account") String account,@Param("password")String password);
+
+    Admin selectByShiro(String account);
 
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
-    public void setAdminForLogin(Admin admin);
+    int setAdminForLogin(Admin admin);
 }

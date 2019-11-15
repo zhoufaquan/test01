@@ -21,6 +21,15 @@ public class Candidate {
     private String cImage;
 
     private String cSex;
+    private String cType;
+
+    public String getcType() {
+        return cType;
+    }
+
+    public void setcType(String cType) {
+        this.cType = cType;
+    }
 
     public Integer getcId() {
         return cId;
