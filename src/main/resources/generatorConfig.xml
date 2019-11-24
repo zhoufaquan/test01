@@ -49,7 +49,7 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表 -->
-        <table tableName="rj" enableCountByExample="false"
+        <table tableName="exam" enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

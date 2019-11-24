@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
 </head>
 <style>
     .logsUl li {
@@ -98,7 +99,7 @@
         <div class="card-body">
             <div class="ta-log-left">
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="日志名称" aria-label="Search">
                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                     <button class="btn btn-danger  ml-2" ><i class="fa fa-trash"></i>&nbsp;批量删除</button>
                 </form>
@@ -109,10 +110,10 @@
                     <thead>
                     <tr>
                         <th>
-                            <input type="checkbox">
+                            <input type="checkbox" class="checkbox-all">
                         </th>
                         <th scope="col">#</th>
-                        <th scope="col">操作</th>
+                        <th scope="col">日志名称</th>
                         <th scope="col">日期</th>
                         <th scope="col">操作id</th>
                         <th scope="col">操作者</th>
@@ -123,15 +124,15 @@
                     <tbody>
                     <tr th:each="item,start:${logs}" th:data-logsid="${item.logId}">
                         <th>
-                           <input type="checkbox" >
+                           <input type="checkbox" class="checkbox-to-all" >
                         </th>
                         <th scope="row" th:text="${start.index+1}">#</th>
                         <td th:text="${item.logOperation}">操作</td>
-                        <td th:text="${item.logTime}">日期</td>
+                        <td th:text="${#dates.format(item.logTime,'yyyy-MM-dd HH:mm:ss')}">日期</td>
                         <td th:text="${item.logUserid}"></td>
                         <td th:text="${item.logUser}">操作者</td>
                         <td>
-                            <button class="btn btn-success btn-sm fax btn-detail" data-toggle="modal" data-target=""><li class="fa fa-check "></li></button>
+                            <button class="btn btn-outline-dark btn-sm btn-detail" data-toggle="modal" data-target="">详情</button>
 
                             <button class="btn btn-danger btn-sm fax" ><i class="fa fa-trash"></i></button>
                         </td>
@@ -140,43 +141,79 @@
 
                 </table>
 
-                <div CLASS="tab-f">
+                <div class="tab-f">
                     <ul class="logsUl">
                         <li>共 &nbsp;<a th:text="${pageInfo.total}"></a>&nbsp;条</li>
                         <li>|</li>
-                        <li>每页&nbsp;5&nbsp;条</li>
+                        <li>每页&nbsp;10&nbsp;条</li>
                         <li>|</li>
                         <li>共&nbsp;<a th:text="${pageInfo.pages}"></a>&nbsp;页</li>
                     </ul>
 
-                    <nav aria-label="Page navigation example" class="nav-page">
-                        <button type="button" id="first" class="btn btn-outline-primary ct btn-f1"
-                                th:data-url="@{/bs/logs}">首页
-                        </button>
-                        <ul class="pagination pagination-sm ct">
-                            <li class="page-item" id="up"
-                                th:data-url="@{/bs/logs(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#"
-                                                            th:text="${pageInfo.pageNum}">1</a></li>
 
-                            <li class="page-item" id="next"
-                                th:data-url="@{/bs/logs(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <button type="button" id="last" class="btn btn-outline-primary ct btn-f1"
-                                th:data-url="@{/bs/logs(pageNum=${pageInfo.pages})}">尾页
-                        </button>
-                    </nav>
                 </div>
+                <!--    分页预览数设置-->
+                <!--1.使用bootsrap nav and ul-->
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" >
+                        <!-- 首页 -->
+                        <li> <a th:onclick="'jump(\''+@{/bs/logs}+'\')'">首页</a></li>
+
+                        <li th:if="${pageInfo.pageNum == 1}"><span>上一页</span></li>
+                        <li th:if="${pageInfo.pageNum > 1}"><a  th:onclick="'jump(\''+@{/bs/logs(pageNum=${pageInfo.pageNum} -1)}+'\')'">上一页</a></li>
+
+                        <th:block data-th-if="${(pageInfo.pages) le 4}" data-th-each="i : ${#numbers.sequence(1,(pageInfo.pages))}">
+                            <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                            <li th:if="${pageInfo.pageNum != i}"><a  th:onclick="'jump(\''+@{/bs/student(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+                        </th:block>
+                        <!-- 当前页面小于等于4,展示<1，2，3，4...> -->
+                        <th:block data-th-if="${((pageInfo.pageNum) le 4) && ((pageInfo.pages) gt 4)}" data-th-each="i : ${#numbers.sequence(1,4)}">
+                            <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                            <li th:if="${pageInfo.pageNum != i}"><a  th:onclick="'jump(\''+@{/bs/logs(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+                        </th:block>
+
+                        <li data-th-if="${((pageInfo.pageNum) le 4) && ((pageInfo.pages) gt 4)}">
+                            <a th:onclick="'jump(\''+@{/bs/logs(pageNum=${pageInfo.pageNum} + 3)}+'\')'" >
+                                <span >...</span>
+                            </a>
+                        </li>
+
+                        <!-- 最后一页与当前页面之差，小于等于3 展示<...14,15,16,17>-->
+
+                        <li data-th-if="${(((pageInfo.pages)-(pageInfo.pageNum)) le 3) && ((pageInfo.pages) gt 4)}">
+                            <a th:onclick="'jump(\''+@{/bs/logs(pageNum=${pageInfo.pageNum}-3)}+'\')'" >
+                                <span >...</span>
+                            </a>
+                        </li>
+                        <th:block data-th-if="${(((pageInfo.pages)-(pageInfo.pageNum)) le 3) && ((pageInfo.pages) gt 4)}" data-th-each="i : ${#numbers.sequence((pageInfo.pages)-3, (pageInfo.pages))}">
+                            <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                            <li th:if="${pageInfo.pageNum != i}"><a  th:onclick="'jump(\''+@{/bs/logs(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+                        </th:block>
+
+                        <!-- 当前页面大于4，最后一页与当前页面之差大于3 展示<...7，8，9....>-->
+                        <li data-th-if="${((pageInfo.pageNum) gt 4) && (((pageInfo.pages)-(pageInfo.pageNum)) gt 3 )}">
+                            <a th:onclick="'jump(\''+@{/bs/logs(pageNum=${pageInfo.pageNum} - 3)}+'\')'" >
+                                <span >...</span>
+                            </a>
+                        </li>
+                        <th:block  data-th-if="${((pageInfo.pageNum ) gt 4) && (((pageInfo.pages)-(pageInfo.pageNum )) gt 3 )}" data-th-each="i : ${#numbers.sequence(pageInfo.pageNum, (pageInfo.pageNum)+2)}">
+                            <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                            <li th:if="${pageInfo.pageNum != i}"><a th:onclick="'jump(\''+@{/bs/logs(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+                        </th:block>
+
+                        <li   data-th-if="${((pageInfo.pageNum) gt 4) && (((pageInfo.pages)-(pageInfo.pageNum)) gt 3 )}">
+                            <a th:onclick="'jump(\''+@{/bs/logs(pageNum=${pageInfo.pageNum} + 3)}+'\')'" >
+                                <span >...</span>
+                            </a>
+                        </li>
+                        <li th:if="${pageInfo.pageNum == pageInfo.pages}"><span>下一页</span></li>
+                        <li th:if="${pageInfo.pageNum < pageInfo.pages}">  <a th:onclick="'jump(\''+@{/bs/logs(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}+'\')'">下一页</a></li>
+                        <li>  <a    th:onclick="'jump(\''+@{/bs/logs(pageNum=${pageInfo.pages})}+'\')'">尾页</a></li>
+
+                    </ul>
+
+                </nav>
 
             </div>
         </div>
@@ -244,18 +281,18 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">修改</button>
+
             </div>
         </div>
     </div>
 </div>
-<div class="alert alert-danger fade in">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>警告框标题</strong> 提交失败！
-</div>
+
 
 <script src="/js/logs.js"></script>
 <script>
+    function jump(url){
+        $("#contents").load(url)
+    }
     function Toast(msg,duration){
         duration=isNaN(duration)?3000:duration;
         var m = document.createElement('div');
@@ -331,7 +368,15 @@
                 $(this).attr("data-target","#exampleModalCenter")
             }
         })
+        $(".checkbox-all").click(function () {
+            if($(this).is(':checked')){
 
+                $(".checkbox-to-all").prop("checked",true);
+            }else{
+
+                $(".checkbox-to-all").prop("checked",false);
+            }
+        })
     })
 </script>
 </body>

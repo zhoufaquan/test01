@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/common.css">
+
+</head>
+
+<body>
+<h1 class="text-capitalize text-black-50 font-weight-normal">用户管理</h1>
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">系统管理</a></li>
+            <li class="breadcrumb-item active">用户管理</li>
+            <li class="breadcrumb-item active">添加用户</li>
+        </ul>
+    </div>
+</div>
+<div class="common">
+    <form>
+        <div class="form-group col-md-8">
+            <label for="nickname">昵称</label>
+            <input type="text" class="form-control " id="nickname"  placeholder="昵称">
+            <small id="nameHelp" class="form-text text-muted">如果您没有想好昵称，系统将为您自动生成一个，如果您已想好那么请确保在6——10个字符之间</small>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="phone">手机号</label>
+            <input type="text" class="form-control" id="phone"   placeholder="手机号将作为您的账号">
+            <small id="phoneHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="email">邮箱</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="邮箱">
+            <small id="emailHelp" class="form-text text-muted">邮箱将用于验证账户，恢复密码等功能</small>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" id="password" placeholder="密码">
+            <small id="passwordHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputState">状态</label>
+            <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>激活</option>
+                <option>禁用</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="inputLimited">角色分配</label>
+            <select id="inputLimited" class="form-control">
+                <option selected>Choose...</option>
+                <option>超级管理员</option>
+                <option>系统管理员</option>
+                <option>普通管理员</option>
+            </select>
+        </div>
+
+<div class="col-md-6">
+        <button type="button" class="btn btn-default  btn-len">返回</button>
+        <button type="submit" class="btn btn-primary btn-len">添加用户</button>
+</div>
+    </form>
+</div>
+<script>
+
+</script>
+</body>
+</html>

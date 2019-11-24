@@ -28,11 +28,15 @@ public class HomePage {
     /* 进入主页 */
     @RequestMapping("HomePage")
     public String getHomePage(Model model, HttpServletRequest request){
+
         String account= (String) request.getSession().getAttribute("account");
-        String nickname=candidateService.getNickname(account);
+        if(account!=null) {
+            String nickname = candidateService.getNickname(account);
+            model.addAttribute("nickname", nickname);
+        }
         List<News> news = newsService.getTitleAndDate();
         model.addAttribute("news",news);
-        model.addAttribute("nickname",nickname);
+
         return "wp/HomePage";
     }
 

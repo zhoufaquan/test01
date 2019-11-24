@@ -8,6 +8,7 @@ import java.util.List;
 @ToString
 @Setter
 @Getter
+//Menu实体增加了存放子菜单的属性
 public class Menu {
     private Integer jId;
 

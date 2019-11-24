@@ -101,7 +101,7 @@ public class BsMainController extends AllException {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
         session.removeAttribute("CODE");
-        VerificationUtil vCode = new VerificationUtil(100, 30, 4, 60);
+        VerificationUtil vCode = new VerificationUtil(100, 30, 4, 20);
         session.setAttribute("CODE", vCode.getCode());
         try {
             vCode.write(response.getOutputStream());

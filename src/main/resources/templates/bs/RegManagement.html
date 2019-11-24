@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--   <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">-->
+    <link rel="stylesheet" href="/css/pageInfo.css">
+    <link rel="stylesheet" href="/css/rcswitcher.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+</head>
+<style>
+    .main-u {
+        margin: 20px auto;
+        width: 96%;
+    }
+
+    /*----------用来移除叉叉按钮----------*/
+    input[type="date"]::-webkit-clear-button {
+        display: none;
+    }
+
+    input[type="date"]::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    input[type=date]::-webkit-inner-spin-button {
+        visibility: hidden;
+    }
+
+    .ta-log-left {
+
+        width: 93%;
+        height: 60px;
+    }
+
+    input[type="checkbox"] {
+
+    }
+
+    th, td {
+        text-align: center;
+
+    }
+
+    #kkk {
+        width: 100%;
+        height: 160px;
+    }
+    .left{
+        float: left;
+       width: 50%;
+
+    }
+     .right{
+        float: left;
+        width: 50%;
+
+    }
+
+
+</style>
+
+
+<body>
+
+<h1 class="text-capitalize text-black-50 font-weight-normal">报名管理</h1>
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">考务中心</a></li>
+            <li class="breadcrumb-item active">报名管理</li>
+        </ul>
+    </div>
+</div>
+<div class="main-u">
+
+    <div class="ta-log-left">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="昵称/手机号/邮箱" aria-label="Search">
+            <input id="meeting" type="date" class="form-control mr-sm-2"/>
+            <button class="btn btn-primary btn-sm m-sm-1" type="submit"><span class="fa fa-search m-1"></span>搜索
+            </button>
+            <button class="btn btn-primary btn-sm m-sm-1 "  id="addUser" type="button"><span class="fa fa-plus m-1"></span>添加</button>
+            <button class="btn btn-primary btn-sm  m-sm-1" type="submit"><span class="fa fa-share m-1"></span>导出
+            </button>
+        </form>
+
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">
+                <input type="checkbox" class="checkbox-all">
+
+            </th>
+            <th scope="col">姓名</th>
+            <th scope="col">手机号</th>
+            <th scope="col">邮箱</th>
+            <th scope="col">状态</th>
+
+            <th scope="col">创建时间</th>
+            <!--  <th scope="col">登陆时间</th>
+              <th scope="col">上次登录时间</th>
+              <th scope="col">登录次数</th>-->
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item,start:${admin}" th:data-aId="${item.aId}">
+            <th scope="row">
+                <input type="checkbox" class="checkbox-to-all">
+
+            </th>
+            <td th:text="${item.aName}">Mark</td>
+            <td th:text="${item.aPhone}">Otto</td>
+            <td th:text="${item.aMail}">@mdo</td>
+
+            <td th:if="${item.aState}==true">
+
+                <div class="permissions m-auto">
+                    <input type="checkbox" class="change" th:name="${'access_cp'+start.index}" th:value="${'access_cp'+start.index}"
+                           checked><br/>
+                </div>
+            </td>
+            <td th:text="${#dates.format(item.aCt,'yyyy-MM-dd HH:mm:ss')}">@mdo</td>
+            <!--   <td th:text="${#dates.format(item.aSt,'yyyy-MM-dd HH:mm:ss')}">Mark</td>
+               <td th:text="${#dates.format(item.aLst,'yyyy-MM-dd HH:mm:ss')}">Otto</td>
+               <td th:text="${item.aCount}">@mdo</td>-->
+
+            <td>
+                <button class="btn btn-outline-dark btn-sm btn-detail" data-toggle="modal" data-target="#myModal2">详情</button>
+                <button class="btn btn-danger btn-sm del">删除</button>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="tab-f">
+        <ul class="logsUl">
+            <li>共 &nbsp;<a th:text="${pageInfo.total}"></a>&nbsp;条</li>
+            <li>|</li>
+            <li>每页&nbsp;5&nbsp;条</li>
+            <li>|</li>
+            <li>共&nbsp;<a th:text="${pageInfo.pages}"></a>&nbsp;页</li>
+        </ul>
+    </div>
+    <!--    分页预览数设置-->
+    <!--1.使用bootsrap nav and ul-->
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination" >
+            <!-- 首页 -->
+            <li> <a th:onclick="'jump(\''+@{/bs/student}+'\')'">首页</a></li>
+
+            <li th:if="${pageInfo.pageNum == 1}"><span>上一页</span></li>
+            <li th:if="${pageInfo.pageNum > 1}"><a  th:onclick="'jump(\''+@{/bs/student(pageNum=${pageInfo.pageNum} -1)}+'\')'">上一页</a></li>
+
+            <th:block data-th-if="${(pageInfo.pages) le 4}" data-th-each="i : ${#numbers.sequence(1,(pageInfo.pages))}">
+                <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                <li th:if="${pageInfo.pageNum != i}"><a  th:onclick="'jump(\''+@{/bs/student(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+            </th:block>
+            <!-- 当前页面小于等于4,展示<1，2，3，4...> -->
+
+            <th:block data-th-if="${((pageInfo.pageNum) le 4) && ((pageInfo.pages) gt 4)}" data-th-each="i : ${#numbers.sequence(1,4)}">
+                <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                <li th:if="${pageInfo.pageNum != i}"><a  th:onclick="'jump(\''+@{/bs/student(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+            </th:block>
+
+            <li data-th-if="${((pageInfo.pageNum) le 4) && ((pageInfo.pages) gt 4)}">
+                <a th:onclick="'jump(\''+@{/bs/student(pageNum=${pageInfo.pageNum} + 3)}+'\')'" >
+                    <span >...</span>
+                </a>
+            </li>
+
+            <!-- 最后一页与当前页面之差，小于等于3 展示<...14,15,16,17>-->
+
+            <li data-th-if="${(((pageInfo.pages)-(pageInfo.pageNum)) le 3) && ((pageInfo.pages) gt 4)}">
+                <a th:onclick="'jump(\''+@{/bs/student(pageNum=${pageInfo.pageNum}-3)}+'\')'" >
+                    <span >...</span>
+                </a>
+            </li>
+            <th:block data-th-if="${(((pageInfo.pages)-(pageInfo.pageNum)) le 3) && ((pageInfo.pages) gt 4)}" data-th-each="i : ${#numbers.sequence((pageInfo.pages)-2, (pageInfo.pages))}">
+                <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                <li th:if="${pageInfo.pageNum != i}"><a  th:onclick="'jump(\''+@{/bs/student(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+            </th:block>
+
+            <!-- 当前页面大于4，最后一页与当前页面之差大于3 展示<...7，8，9....>-->
+            <li data-th-if="${((pageInfo.pageNum) gt 4) && (((pageInfo.pages)-(pageInfo.pageNum)) gt 3 )}">
+                <a th:onclick="'jump(\''+@{/bs/student(pageNum=${pageInfo.pageNum} - 3)}+'\')'" >
+                    <span >...</span>
+                </a>
+            </li>
+            <th:block  data-th-if="${((pageInfo.pageNum ) gt 4) && (((pageInfo.pages)-(pageInfo.pageNum )) gt 3 )}" data-th-each="i : ${#numbers.sequence(pageInfo.pageNum, (pageInfo.pageNum)+2)}">
+                <li th:if="${pageInfo.pageNum == i}"  class="active"><span th:text="${i}">页码</span></li>
+                <li th:if="${pageInfo.pageNum != i}"><a th:onclick="'jump(\''+@{/bs/student(pageNum=${i})}+'\')'" th:text="${i}">页码</a></li>
+            </th:block>
+
+            <li   data-th-if="${((pageInfo.pageNum) gt 4) && (((pageInfo.pages)-(pageInfo.pageNum)) gt 3 )}">
+                <a th:onclick="'jump(\''+@{/bs/student(pageNum=${pageInfo.pageNum} + 3)}+'\')'" >
+                    <span >...</span>
+                </a>
+            </li>
+            <li th:if="${pageInfo.pageNum == pageInfo.pages}"><span>下一页</span></li>
+            <li th:if="${pageInfo.pageNum < pageInfo.pages}">  <a th:onclick="'jump(\''+@{/bs/student(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}+'\')'">下一页</a></li>
+            <li>  <a    th:onclick="'jump(\''+@{/bs/student(pageNum=${pageInfo.pages})}+'\')'">尾页</a></li>
+
+        </ul>
+
+    </nav>
+
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">考生信息核对</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                   <div id= "kkk">
+                       <div class="left">
+                    <div class="form-row" >
+                        <div class="form-group col-md-6">
+                            <label for="inputLogsId">考生姓名</label>
+                            <input type="text" class="form-control" id="inputLogsId" placeholder="" style="width: 200px">
+                        </div>
+                    </div>
+                    <div class="form-row" >
+                    <div class="form-group col-md-6">
+                        <label for="inputMethod">准考证号</label>
+                        <input type="text" class="form-control" id="inputMethod" placeholder="" style="width: 200px">
+                    </div>
+                    </div>
+                       </div>
+                       <div class="right" style="width: 150px;height: 150px;border-radius: 50px; margin-top: 20px; margin-right: 20px; margin-left: 40px"><img src="/img/1.jpg" style="width: 150px;height: 150px;"></div>
+
+                   </div>
+
+                    <div class="form-group ">
+                        <label for="inputParm">证件号码</label>
+                        <input type="text" class="form-control" id="inputParm" placeholder="">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputTime">考试时间</label>
+                            <input id="inputTime" type="date" class="form-control mr-sm-2"/>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputUserId">座位号</label>
+                            <input type="text" class="form-control " id="inputUserId">
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputIp1">考试地点</label>
+                            <input type="text" class="form-control" id="inputIp1">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputUserId2">考场号</label>
+                            <input type="text" class="form-control " id="inputUserId2">
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/logs.js"></script>
+<script type="text/javascript" src="/js/jquery-2.1.1.min.js"/>
+<script type="text/javascript" src="/js/rcswitcher.min.js"/>
+<script>
+    function jump(url){
+        $("#contents").load(url)
+    }
+    $(function () {
+        $('.permissions :checkbox').rcSwitcher({
+
+            // reverse: true,
+            // inputs: true,
+            width: 70,
+            height: 30,
+            blobOffset: 2,
+            onText: '激活',
+            offText: '禁用',
+            theme: 'dark',
+            // autoFontSize: true,
+            autoStick: true,
+
+        });
+
+        $(".checkbox-all").click(function () {
+            if ($(this).is(':checked')) {
+
+                $(".checkbox-to-all").prop("checked", true);
+            } else {
+
+                $(".checkbox-to-all").prop("checked", false);
+            }
+        })
+        $(".del").click(function () {
+            var aId=$(this).parents("tr").attr("data-aId")
+            $.ajax({
+                url:"/bs/admindel",
+                type:"GET",
+                dataType:"text",
+                contentType:"application/json",
+                data:{"a_id":aId},
+                success:function (m) {
+
+                    if(m==1){
+                        $("#contents").load("/bs/user") /*都用这个*/
+                    }else if(m==0){
+
+                    }else{
+                        Toast("你的级别还不够高,加油吧！少年。","2000")
+                    }
+                }
+            })
+        })
+        $(".dark ").click(function () {
+
+            var flag=$(this).next(".change").prop("checked");
+            var aId=$(this).parents("tr").attr("data-aId");
+            $.ajax({
+                url:"/bs/changeState",
+                type:"GET",
+                dataType:"text",
+
+                contentType:"application/json",
+                data:{"a_id":aId,"a_state":flag},
+                success:function (m) {
+
+                    if(m==1){
+                        // $("#contents").load("/bs/user") /*都用这个*/
+                    }else if(m==0){
+
+                    }else{
+
+                        $("#contents").load("/bs/user")
+                        Toast("你的级别还不够高,此操作无效。","2000")
+                    }
+                }
+            })
+
+        })
+        $("#addUser").click(function () {
+            $("#contents").load("/bs/addUser")
+        })
+    })
+
+
+</script>
+</body>
+
+
+</html>

@@ -20,7 +20,7 @@ public class PsController extends AllException {
         Set<Role> roles = admin.getRoles();
         Role role=(Role)roles.iterator().next();
         admin.setPermissions(null);
-        System.out.println(role.getrRole());
+       // System.out.println(role.getrRole());
         model.addAttribute(admin);
 
         model.addAttribute(role);

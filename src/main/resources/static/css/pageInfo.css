@@ -1,0 +1,24 @@
+.tab-f {
+    width: 100%;
+    height: 31px;
+
+}
+.logsUl li {
+    float: left;
+    list-style: none;
+    line-height: 31px;
+    font-size: 14px;
+    margin-right: 4px;
+}
+.nav-page {
+    float: right;
+}
+
+.pagination-sm {
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+.ct{
+    float: left;
+}

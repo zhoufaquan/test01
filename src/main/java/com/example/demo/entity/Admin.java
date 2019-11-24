@@ -36,6 +36,8 @@ public class Admin implements Serializable {
     private Date aLst;
 
     private Integer aCount;
+
+    private String aRole;
     /*角色*/
     private Set<Role> roles = new HashSet<>();
     private Set<Authority> permissions = new HashSet<>();

@@ -23,6 +23,7 @@ public class CandidateService {
             Candidate  candidate1= candidateMapper.selectToLogin(candidate);
             if(candidate1!=null){
                 map.put("nickname",candidate1.getcNickname());
+                map.put("photo",candidate1.getcImage());
                 map.put("msg","1");
             }else {
                 /*密码错误*/

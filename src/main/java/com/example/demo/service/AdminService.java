@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -43,5 +44,18 @@ public class AdminService {
     }
     public Admin getBean(String account){
         return adminMapper.selectByShiro(account);
+    }
+    public List<Admin> selectAll(){
+        return adminMapper.selectAll();
+    }
+    public List<Admin> selectAll2(){
+        return adminMapper.selectAll2();
+    }
+
+    public int updateByIdTostate(boolean a_state,int a_id){
+        return adminMapper.updateByIdTostate(a_state,a_id);
+    }
+    public int deleteByPrimaryKey(int a_id){
+        return adminMapper.deleteByPrimaryKey(a_id);
     }
 }
