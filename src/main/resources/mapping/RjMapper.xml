@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.RjMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Rj" >
+    <id column="rj_id" property="rjId" jdbcType="INTEGER" />
+    <result column="r_id" property="rId" jdbcType="INTEGER" />
+    <result column="j_id" property="jId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rj_id, r_id, j_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rj
+    where rj_id = #{rjId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rj
+    where rj_id = #{rjId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Rj" >
+    insert into rj (rj_id, r_id, j_id
+      )
+    values (#{rjId,jdbcType=INTEGER}, #{rId,jdbcType=INTEGER}, #{jId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Rj" >
+    insert into rj
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rjId != null" >
+        rj_id,
+      </if>
+      <if test="rId != null" >
+        r_id,
+      </if>
+      <if test="jId != null" >
+        j_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rjId != null" >
+        #{rjId,jdbcType=INTEGER},
+      </if>
+      <if test="rId != null" >
+        #{rId,jdbcType=INTEGER},
+      </if>
+      <if test="jId != null" >
+        #{jId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Rj" >
+    update rj
+    <set >
+      <if test="rId != null" >
+        r_id = #{rId,jdbcType=INTEGER},
+      </if>
+      <if test="jId != null" >
+        j_id = #{jId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rj_id = #{rjId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Rj" >
+    update rj
+    set r_id = #{rId,jdbcType=INTEGER},
+      j_id = #{jId,jdbcType=INTEGER}
+    where rj_id = #{rjId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.AuthorityMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Authority">
+        <id column="j_id" property="jId" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="j_name" property="jName" jdbcType="VARCHAR"/>
+        <result column="j_url" property="jUrl" jdbcType="VARCHAR"/>
+        <result column="j_icon" property="jIcon" jdbcType="VARCHAR"/>
+        <result column="j_show" property="jShow" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    j_id, pid, j_name, j_url, j_icon, j_show
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from authority
+        where j_id = #{jId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByRole" resultMap="BaseResultMap">
+    select
+    a.j_id, a.pid, a.j_name, a.j_url, a.j_icon, a.j_show
+    from authority a
+    INNER JOIN role r on r.r_limited=#{limited}
+    INNER JOIN rj j on j.r_id=r.r_id
+    WHERE j.j_id=a.j_id and a.j_show!=""
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from authority
+    where j_id = #{jId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.example.demo.entity.Authority">
+    insert into authority (j_id, pid, j_name, 
+      j_url, j_icon, j_show)
+    values (#{jId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{jName,jdbcType=VARCHAR}, 
+      #{jUrl,jdbcType=VARCHAR}, #{jIcon,jdbcType=VARCHAR}, #{jShow,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.demo.entity.Authority">
+        insert into authority
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jId != null">
+                j_id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="jName != null">
+                j_name,
+            </if>
+            <if test="jUrl != null">
+                j_url,
+            </if>
+            <if test="jIcon != null">
+                j_icon,
+            </if>
+            <if test="jShow != null">
+                j_show,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jId != null">
+                #{jId,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="jName != null">
+                #{jName,jdbcType=VARCHAR},
+            </if>
+            <if test="jUrl != null">
+                #{jUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="jIcon != null">
+                #{jIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="jShow != null">
+                #{jShow,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Authority">
+        update authority
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="jName != null">
+                j_name = #{jName,jdbcType=VARCHAR},
+            </if>
+            <if test="jUrl != null">
+                j_url = #{jUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="jIcon != null">
+                j_icon = #{jIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="jShow != null">
+                j_show = #{jShow,jdbcType=BIT},
+            </if>
+        </set>
+        where j_id = #{jId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Authority">
+    update authority
+    set pid = #{pid,jdbcType=INTEGER},
+      j_name = #{jName,jdbcType=VARCHAR},
+      j_url = #{jUrl,jdbcType=VARCHAR},
+      j_icon = #{jIcon,jdbcType=VARCHAR},
+      j_show = #{jShow,jdbcType=BIT}
+    where j_id = #{jId,jdbcType=INTEGER}
+  </update>
+</mapper>

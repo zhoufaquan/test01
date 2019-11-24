@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<h1 class="text-capitalize text-black-50 font-weight-normal">考试管理</h1>
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">考务中心</a></li>
+            <li class="breadcrumb-item active">考试管理</li>
+        </ul>
+    </div>
+</div>
+<div>
+
+    <div class="card ct m-3" style="width: 18rem;" th:each="item:${exam}">
+        <img class="card-img-top" th:src="${item.eBackground}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${item.eName}"></h5>
+
+            <p class="font-sm">报名开始时间:<small class="font-sm" th:text="${#dates.format(item.eBegin,'yyyy-MM-dd HH:mm:ss')}"></small></p>
+            <p class="font-sm">报名截止时间:<small class="font-sm" th:text="${#dates.format(item.eEnd,'yyyy-MM-dd HH:mm:ss')}"></small></p>
+            <p class="font-sm">考试开始时间:<small class="font-sm" th:text="${#dates.format(item.eBegin,'yyyy-MM-dd HH:mm:ss')}"></small></p>
+            <p class="font-sm">考试截止时间:<small class="font-sm" th:text="${#dates.format(item.eEnd,'yyyy-MM-dd HH:mm:ss')}"></small></p>
+            <p >状态:开启</p>
+
+            <a href="#" class="card-link">设置</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

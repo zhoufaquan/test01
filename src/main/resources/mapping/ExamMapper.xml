@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.ExamMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Exam" >
+    <id column="e_id" property="eId" jdbcType="INTEGER" />
+    <result column="e_name" property="eName" jdbcType="VARCHAR" />
+    <result column="e_background" property="eBackground" jdbcType="VARCHAR" />
+    <result column="e_start" property="eStart" jdbcType="TIMESTAMP" />
+    <result column="e_end" property="eEnd" jdbcType="TIMESTAMP" />
+    <result column="e_begin" property="eBegin" jdbcType="TIMESTAMP" />
+    <result column="e_shutdown" property="eShutdown" jdbcType="TIMESTAMP" />
+    <result column="e_state" property="eState" jdbcType="INTEGER" />
+    <result column="e_remark" property="eRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    e_id, e_name, e_background, e_start, e_end, e_begin, e_shutdown, e_state, e_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exam
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from exam
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exam
+    where e_id = #{eId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Exam" >
+    insert into exam (e_id, e_name, e_background, 
+      e_start, e_end, e_begin, 
+      e_shutdown, e_state, e_remark
+      )
+    values (#{eId,jdbcType=INTEGER}, #{eName,jdbcType=VARCHAR}, #{eBackground,jdbcType=VARCHAR}, 
+      #{eStart,jdbcType=TIMESTAMP}, #{eEnd,jdbcType=TIMESTAMP}, #{eBegin,jdbcType=TIMESTAMP}, 
+      #{eShutdown,jdbcType=TIMESTAMP}, #{eState,jdbcType=INTEGER}, #{eRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Exam" >
+    insert into exam
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        e_id,
+      </if>
+      <if test="eName != null" >
+        e_name,
+      </if>
+      <if test="eBackground != null" >
+        e_background,
+      </if>
+      <if test="eStart != null" >
+        e_start,
+      </if>
+      <if test="eEnd != null" >
+        e_end,
+      </if>
+      <if test="eBegin != null" >
+        e_begin,
+      </if>
+      <if test="eShutdown != null" >
+        e_shutdown,
+      </if>
+      <if test="eState != null" >
+        e_state,
+      </if>
+      <if test="eRemark != null" >
+        e_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="eName != null" >
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eBackground != null" >
+        #{eBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="eStart != null" >
+        #{eStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eEnd != null" >
+        #{eEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eBegin != null" >
+        #{eBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eShutdown != null" >
+        #{eShutdown,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eState != null" >
+        #{eState,jdbcType=INTEGER},
+      </if>
+      <if test="eRemark != null" >
+        #{eRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Exam" >
+    update exam
+    <set >
+      <if test="eName != null" >
+        e_name = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eBackground != null" >
+        e_background = #{eBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="eStart != null" >
+        e_start = #{eStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eEnd != null" >
+        e_end = #{eEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eBegin != null" >
+        e_begin = #{eBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eShutdown != null" >
+        e_shutdown = #{eShutdown,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eState != null" >
+        e_state = #{eState,jdbcType=INTEGER},
+      </if>
+      <if test="eRemark != null" >
+        e_remark = #{eRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Exam" >
+    update exam
+    set e_name = #{eName,jdbcType=VARCHAR},
+      e_background = #{eBackground,jdbcType=VARCHAR},
+      e_start = #{eStart,jdbcType=TIMESTAMP},
+      e_end = #{eEnd,jdbcType=TIMESTAMP},
+      e_begin = #{eBegin,jdbcType=TIMESTAMP},
+      e_shutdown = #{eShutdown,jdbcType=TIMESTAMP},
+      e_state = #{eState,jdbcType=INTEGER},
+      e_remark = #{eRemark,jdbcType=VARCHAR}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+</mapper>
